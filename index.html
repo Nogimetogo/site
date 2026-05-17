@@ -3,27 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mr.PHOTOGRAPHER | Portfolio</title>
-    <meta name="description" content="旅と日常の情景を切り取る写真家ポートフォリオ。">
-    <link rel="stylesheet" href="./styles.css">
+    <title>Nogime togo | Portfolio</title>
+    <meta name="description" content="Nogime togoの写真、建築、アート作品をまとめたポートフォリオサイト。">
+    <link rel="stylesheet" href="./styles.css?v=20260517-brand">
   </head>
   <body>
-    <aside class="side-nav" aria-label="Primary navigation">
-      <a class="brand" href="#top">Mr.PHOTOGRAPHER</a>
-      <nav class="nav-links">
-        <a href="#gallery">GALLERY</a>
-        <a href="#profile">PROFILE</a>
-        <a href="#news">NEWS</a>
-        <a href="#contact">CONTACT</a>
-      </nav>
-      <a class="social" href="#contact" aria-label="Instagram">IG</a>
-    </aside>
-
-    <header class="mobile-header">
-      <a href="#top">Mr.PHOTOGRAPHER</a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
-      <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation">
-        <a href="#gallery">GALLERY</a>
+    <header class="site-header">
+      <div class="brand-block">
+        <a class="brand" href="#top" aria-label="Nogime togo home">Nogime togo</a>
+        <p class="brand-tagline">Draw | Build | Place<br>Works in Architecture &amp; Photography</p>
+      </div>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primaryNav">MENU</button>
+      <nav id="primaryNav" class="primary-nav" aria-label="Primary navigation">
+        <a href="#gallery">PICK UP</a>
         <a href="#profile">PROFILE</a>
         <a href="#news">NEWS</a>
         <a href="#contact">CONTACT</a>
@@ -31,113 +23,96 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-label="Featured photography">
-        <div class="hero-slide is-active" style="background-image: url('./assets/nac0d3703e572_1737285043-KjyHWrM0vNTnXBSUFQfx2loA.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('./assets/n40fc81937a42_1710982208463-TstZn2laQt.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('./assets/n7b65bf500693_1737285511-RWQj16K3mC8SNsI5vAeV4YGy.jpg')"></div>
-        <div class="hero-caption">
-          <p>Connected to silence through my lens.</p>
-          <span>Mr.PHOTOGRAPHER</span>
-        </div>
-        <div class="hero-controls" aria-label="Slideshow controls">
-          <button class="prev" type="button" aria-label="Previous image"></button>
-          <button class="toggle" type="button" aria-label="Pause slideshow"></button>
-          <button class="next" type="button" aria-label="Next image"></button>
+      <section class="hero" aria-label="Featured works">
+        <button class="hero-click-target" type="button" aria-label="Next image"></button>
+        <div class="hero-slide is-active" style="background-image: url('./assets/projects/nac0d3703e572_1737285043-KjyHWrM0vNTnXBSUFQfx2loA.webp')"></div>
+        <div class="hero-slide" style="background-image: url('./assets/projects/n40fc81937a42_1710982208463-TstZn2laQt.webp')"></div>
+        <div class="hero-slide" style="background-image: url('./assets/projects/n7b65bf500693_1737285511-RWQj16K3mC8SNsI5vAeV4YGy.webp')"></div>
+        <div class="hero-caption reveal">
+          <p>(c)Nogime togo</p>
         </div>
       </section>
 
-      <section id="news" class="section news-section">
+      <section id="news" class="section news-section reveal">
         <div class="section-heading">
           <h1>NEWS</h1>
-          <a href="#contact">view more</a>
         </div>
         <div class="news-list">
           <article>
-            <a href="#gallery">GALLERY に10点追加</a>
-            <time datetime="2026-05-16">2026.05.16</time>
+            <a href="#gallery">Portfolio site renewal</a>
+            <time datetime="2026-05-17">2026.05.17</time>
           </article>
           <article>
-            <a href="#profile">ポートレート撮影受付を開始</a>
-            <time datetime="2026-05-04">2026.05.04</time>
+            <a href="#gallery">Photograph / Architecture / Art categories added</a>
+            <time datetime="2026-05-17">2026.05.17</time>
           </article>
           <article>
-            <a href="#gallery">街と光のシリーズを公開</a>
-            <time datetime="2026-04-22">2026.04.22</time>
+            <a href="#profile">Profile updated</a>
+            <time datetime="2026-05-17">2026.05.17</time>
           </article>
         </div>
       </section>
 
       <section id="gallery" class="section gallery-section">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <h1>PICK UP</h1>
-          <span></span>
         </div>
-        <div class="masonry-grid" aria-label="Selected works">
-          <figure class="wide">
-            <img src="./assets/n40fc81937a42_1710982198849-C3Nze0wGxx.jpg" alt="石畳の路地を歩く人物">
-          </figure>
-          <figure>
-            <img src="./assets/nac0d3703e572_1737284894-Sit1OQhMDN8TYvGlHFuU3ZwI.jpg" alt="緑の奥にある古い建築">
-          </figure>
-          <figure>
-            <img src="./assets/nac0d3703e572_1737284741-kwqhVRHtuPQB0G7WmCUMejfD.jpg" alt="市場の自転車と光">
-          </figure>
-          <figure class="tall">
-            <img src="./assets/n3e58eb455886_1710989007196-UV997XpOnr.jpg" alt="影の中のポートレート">
-          </figure>
-          <figure>
-            <img src="./assets/n7b65bf500693_1737285510-RynxLZ1cvYME9kz8G7riCJuT.jpg" alt="都市の夕暮れ">
-          </figure>
-          <figure>
-            <img src="./assets/n341097f2dec5_1734755587-JfuGsLXCY2qZ6Dmr4t8EyUpb.jpg" alt="傘を持つ人物">
-          </figure>
-          <figure class="wide">
-            <img src="./assets/nac0d3703e572_1737284637-vRJ2bLMXBfUHxPeOpV30Sr8c.jpg" alt="建築の幾何学的な構成">
-          </figure>
-          <figure>
-            <img src="./assets/n983fed018ca7_1735732108-asjebFYI20MdqJ7vHUhlE1S3.jpg" alt="静かな屋外風景">
-          </figure>
+        <div class="category-tabs reveal" aria-label="Content category">
+          <button class="is-active" type="button" data-category="Photograph">Photograph</button>
+          <button type="button" data-category="Architecture">Architecture</button>
+          <button type="button" data-category="Art">Art</button>
         </div>
-        <a class="next-panel" href="#profile">
-          <span>NEXT PAGE</span>
-          <strong>PROFILE</strong>
-        </a>
+        <div class="masonry-grid" aria-label="Selected works"></div>
       </section>
 
-      <section id="profile" class="section profile-section">
+      <section id="profile" class="section profile-section reveal">
         <div class="profile-image">
-          <img src="./assets/nf831ca427519_1710166051579-Ah0H1DsHZQ.jpg" alt="撮影中の写真家">
+          <img src="./assets/projects/nf831ca427519_1710166051579-Ah0H1DsHZQ.webp" alt="Nogime togo profile">
         </div>
         <div class="profile-copy">
           <div class="section-heading">
             <h1>PROFILE</h1>
-            <span></span>
           </div>
-          <h2>光の薄い場所にある、輪郭と気配を撮る。</h2>
+          <h2>ノギメトゴウ/Nogime Togo</h2>
+          <p class="lead">建築エンジニア、デザイナー、写真家、図豪、造形と配置のスペシャリスト</p>
           <p>
-            Tokyo based photographer. 旅先の路地、街の湿度、人物の沈黙を中心に、
-            広告、エディトリアル、個人制作を横断して撮影しています。
+            東京都在住。ゼネコン設計部に在籍し、インテリアから都市スケールまで幅広い設計に関わる。
+            建築と写真を通して、かく・つくる・おくを実践し、図豪――剣豪のようにデザインを極めた者――を目指す。
           </p>
-          <dl>
-            <div><dt>Area</dt><dd>Tokyo / Kyoto / Travel</dd></div>
-            <div><dt>Work</dt><dd>Portrait, Travel, Still life</dd></div>
-            <div><dt>Mail</dt><dd>hello@example.com</dd></div>
-          </dl>
+          <p>
+            ノギメトゴウ。「ノギ／禾」とは、実用性を強く帯びない、細い線状の植物構造を指す。
+            宋代の禾目天目茶碗では、その細線に美が見出され、中国では兎毫と呼ばれた。
+            名付けがたく、主題ならず、価値の中心から外れた無名なもの。日本人の感性としてそれをデザインすることにより、
+            本来は異なる対象が読み替えられ、価値が反転する。その現象への関心が、本名の由来である。
+          </p>
+          <p lang="en">
+            Based in Tokyo. Working in the design division of a general contractor, engaged in projects ranging from interior scale to urban scale.
+            Through architecture and photography, practicing drawing, building, and placing - aspiring to become a "Tugo," one who masters design as a swordsman masters the blade.
+          </p>
+          <p lang="en">
+            Nogimetogo. "Nogi (禾)" refers to the fine, linear plant structures that do not strongly assert practical function.
+            In Song-dynasty Hare's-Fur Tenmoku tea bowls, such delicate lines were discovered as beauty and named Tuhao (rabbit's hair) in China.
+            That reversal - where different objects are reinterpreted and value is transformed through design - forms the origin of this name.
+            It reflects an interest in re-reading what is unnamed, non-central, and structurally overlooked.
+          </p>
         </div>
       </section>
 
-      <section id="contact" class="section contact-section">
-        <a class="next-panel" href="mailto:hello@example.com">
-          <span>SHOOTING REQUEST</span>
-          <strong>CONTACT</strong>
+      <section id="contact" class="section contact-section reveal">
+        <a class="contact-panel" href="mailto:hello@example.com">
+          <span>CONTACT</span>
+          <strong>hello@example.com</strong>
         </a>
-        <footer>
-          <p>Mr.PHOTOGRAPHER</p>
-          <small>Copyright 2026 Mr.PHOTOGRAPHER. All rights reserved.</small>
-        </footer>
       </section>
     </main>
 
+    <footer class="site-footer">
+      <small data-copyright-year="2026">Copyright 2026 Nogime togo</small>
+    </footer>
+
+    <script src="./data/photograph-projects.js?v=20260517"></script>
+    <script src="./data/architecture-projects.js?v=20260517"></script>
+    <script src="./data/projects.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>

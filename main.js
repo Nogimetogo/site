@@ -1,63 +1,93 @@
 const slides = [...document.querySelectorAll(".hero-slide")];
-const links = [...document.querySelectorAll(".nav-links a")];
-const mobileNav = document.querySelector(".mobile-nav");
+const links = [...document.querySelectorAll(".primary-nav a")];
+const primaryNav = document.querySelector(".primary-nav");
 const menuButton = document.querySelector(".menu-button");
-const prevButton = document.querySelector(".hero-controls .prev");
-const nextButton = document.querySelector(".hero-controls .next");
-const toggleButton = document.querySelector(".hero-controls .toggle");
+const heroClickTarget = document.querySelector(".hero-click-target");
+const galleryGrid = document.querySelector(".masonry-grid");
+const categoryButtons = [...document.querySelectorAll(".category-tabs button")];
+const projects = [
+  ...(window.photographProjects || []),
+  ...(window.nogimeProjects || []),
+  ...(window.architectureProjects || [])
+];
 
-let current = 0;
-let playing = true;
-let timer = window.setInterval(showNext, 5200);
+let currentSlide = 0;
+let slideTimer = window.setInterval(showNextSlide, 5000);
 
 function showSlide(index) {
-  slides[current].classList.remove("is-active");
-  current = (index + slides.length) % slides.length;
-  slides[current].classList.add("is-active");
+  slides[currentSlide].classList.remove("is-active");
+  currentSlide = (index + slides.length) % slides.length;
+  slides[currentSlide].classList.add("is-active");
 }
 
-function showNext() {
-  showSlide(current + 1);
+function showNextSlide() {
+  showSlide(currentSlide + 1);
 }
 
-function restartTimer() {
-  window.clearInterval(timer);
-  if (playing) {
-    timer = window.setInterval(showNext, 5200);
-  }
+function restartSlideTimer() {
+  window.clearInterval(slideTimer);
+  slideTimer = window.setInterval(showNextSlide, 5000);
 }
 
-prevButton.addEventListener("click", () => {
-  showSlide(current - 1);
-  restartTimer();
-});
+function assetUrl(path, prefix = "./") {
+  if (!path) return "";
+  if (/^(https?:|data:|\.\/|\.\.\/|\/)/.test(path)) return path;
+  return `${prefix}${path}`;
+}
 
-nextButton.addEventListener("click", () => {
-  showNext();
-  restartTimer();
-});
+function renderProjects(category) {
+  galleryGrid.innerHTML = "";
 
-toggleButton.addEventListener("click", () => {
-  playing = !playing;
-  toggleButton.setAttribute("aria-label", playing ? "Pause slideshow" : "Play slideshow");
-  toggleButton.classList.toggle("is-paused", !playing);
-  restartTimer();
+  projects
+    .filter((project) => project.category === category)
+    .forEach((project) => {
+      const card = project.url ? document.createElement("a") : document.createElement("figure");
+      card.className = ["work-card", "reveal", project.variant].filter(Boolean).join(" ");
+
+      if (project.url) {
+        card.href = project.url;
+        card.setAttribute("aria-label", `${project.title} project page`);
+      }
+
+      const img = document.createElement("img");
+      img.src = assetUrl(project.cover || project.image);
+      img.alt = project.title;
+
+      const caption = document.createElement("figcaption");
+      caption.innerHTML = `<strong>${project.title}</strong><span>${project.category} / ${project.year}</span>`;
+
+      card.append(img, caption);
+      galleryGrid.append(card);
+      revealObserver.observe(card);
+    });
+}
+
+heroClickTarget.addEventListener("click", () => {
+  showNextSlide();
+  restartSlideTimer();
 });
 
 menuButton.addEventListener("click", () => {
-  const open = !mobileNav.classList.contains("is-open");
-  mobileNav.classList.toggle("is-open", open);
+  const open = !primaryNav.classList.contains("is-open");
+  primaryNav.classList.toggle("is-open", open);
   menuButton.setAttribute("aria-expanded", String(open));
 });
 
-mobileNav.addEventListener("click", (event) => {
+primaryNav.addEventListener("click", (event) => {
   if (event.target.matches("a")) {
-    mobileNav.classList.remove("is-open");
+    primaryNav.classList.remove("is-open");
     menuButton.setAttribute("aria-expanded", "false");
   }
 });
 
-const observer = new IntersectionObserver(
+categoryButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    categoryButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+    renderProjects(button.dataset.category);
+  });
+});
+
+const navObserver = new IntersectionObserver(
   (entries) => {
     const visible = entries
       .filter((entry) => entry.isIntersecting)
@@ -72,4 +102,27 @@ const observer = new IntersectionObserver(
   { threshold: [0.28, 0.5, 0.7] }
 );
 
-document.querySelectorAll("section[id]").forEach((section) => observer.observe(section));
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
+);
+
+document.querySelectorAll("section[id]").forEach((section) => navObserver.observe(section));
+document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
+const requestedCategory = new URLSearchParams(window.location.search).get("category");
+const initialCategory = categoryButtons.some((button) => button.dataset.category === requestedCategory)
+  ? requestedCategory
+  : "Photograph";
+
+categoryButtons.forEach((button) => {
+  button.classList.toggle("is-active", button.dataset.category === initialCategory);
+});
+
+renderProjects(initialCategory);
