@@ -351,6 +351,10 @@ main {
   background: var(--soft);
 }
 
+.profile-image img {
+  object-fit: contain;
+}
+
 .profile-copy {
   padding-right: 5vw;
 }
