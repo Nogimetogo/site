@@ -111,6 +111,7 @@ main {
 .hero {
   position: relative;
   min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--header-height));
   overflow: hidden;
   background: #111;
 }
@@ -414,6 +415,7 @@ main {
 
 .project-hero {
   height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   padding: 84px clamp(18px, 8vw, 96px) 72px;
   display: grid;
   grid-template-columns: minmax(280px, 0.75fr) minmax(360px, 1.25fr);
@@ -654,6 +656,7 @@ main {
 
   .hero {
     min-height: calc(88vh - var(--header-height));
+    min-height: calc(88dvh - var(--header-height));
   }
 
   .hero-caption {
@@ -739,7 +742,8 @@ main {
   .photograph-detail {
     height: calc(100vh - var(--header-height));
     height: calc(100dvh - var(--header-height));
-    padding: 24px 18px 54px;
+    padding: 18px 18px 46px;
+    grid-template-rows: auto minmax(220px, 1fr);
   }
 
   .photograph-heading {
@@ -748,14 +752,30 @@ main {
   }
 
   .photograph-heading .project-title {
-    font-size: clamp(24px, 7vw, 34px);
+    font-size: clamp(22px, 6.2vw, 30px);
     line-height: 1.18;
+  }
+
+  .project-close {
+    right: 14px;
+    bottom: 12px;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 560px) {
+  :root {
+    --header-height: 58px;
+  }
+
+  .site-header {
+    min-height: var(--header-height);
+    padding: 0 14px;
+    gap: 10px;
+  }
+
   .brand {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .brand-tagline {
@@ -765,6 +785,13 @@ main {
   .hero-caption {
     display: grid;
     gap: 8px;
+    left: 14px;
+    right: 14px;
+    bottom: 18px;
+  }
+
+  .section {
+    padding: 56px 14px;
   }
 
   .section-heading {
@@ -774,11 +801,53 @@ main {
   .category-tabs {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .masonry-grid {
     grid-template-columns: 1fr;
-    grid-auto-rows: 240px;
+    grid-auto-rows: minmax(230px, 62vw);
+    gap: 6px;
+  }
+
+  .work-card figcaption {
+    padding: 14px;
+  }
+
+  .profile-section {
+    padding: 64px 14px;
+  }
+
+  .profile-image {
+    height: min(380px, 78vw);
+    margin: 0 -14px;
+  }
+
+  .profile-copy h2 {
+    font-size: clamp(26px, 8vw, 34px);
+    word-break: normal;
+  }
+
+  .profile-copy p {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .project-hero {
+    padding: 36px 14px 64px;
+  }
+
+  .project-title {
+    font-size: clamp(28px, 9vw, 38px);
+  }
+
+  .project-summary {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .project-images {
+    gap: 6px;
   }
 
   .contact-panel {
@@ -788,10 +857,32 @@ main {
   }
 
   .photograph-detail {
-    padding: 18px 14px 48px;
+    padding: 12px 14px 42px;
+    grid-template-rows: auto minmax(260px, 1fr);
   }
 
   .photograph-heading {
-    padding-bottom: 12px;
+    padding: 8px 0 10px;
+  }
+
+  .photograph-heading .project-title {
+    font-size: clamp(20px, 5.8vw, 26px);
+    line-height: 1.14;
+  }
+
+  .photograph-images {
+    width: 100%;
+  }
+
+  .photograph-images img {
+    max-height: 100%;
+  }
+
+  .photograph-page .primary-nav {
+    background: #777774;
+  }
+
+  .photograph-page .primary-nav a {
+    border-color: rgba(242, 240, 234, 0.18);
   }
 }
