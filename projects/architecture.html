@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Architecture | Nogime togo</title>
     <meta name="description" content="Nogime togoのArchitectureプロジェクトページ。">
-    <link rel="stylesheet" href="../styles.css?v=20260517-mobile">
+    <link rel="stylesheet" href="../styles.css?v=20260517-mobilefix">
   </head>
   <body class="project-page" data-return-url="../index.html?category=Architecture#gallery">
     <header class="site-header">
@@ -85,6 +85,7 @@
         { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
       );
 
+      document.documentElement.classList.add("reveal-ready");
       document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
 
       const primaryNav = document.querySelector(".primary-nav");

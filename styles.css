@@ -124,6 +124,7 @@ main {
   border: 0;
   background: transparent;
   cursor: pointer;
+  touch-action: pan-y;
 }
 
 .hero-slide {
@@ -590,16 +591,21 @@ main {
 }
 
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-ready .reveal {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 720ms ease, transform 720ms ease;
 }
 
-.reveal.photograph-reveal {
+.reveal-ready .reveal.photograph-reveal {
   transition: opacity 1300ms ease, transform 1300ms ease;
 }
 
-.reveal.is-visible {
+.reveal-ready .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -635,6 +641,7 @@ main {
     top: var(--header-height);
     left: 0;
     right: 0;
+    z-index: 60;
     display: none;
     grid-template-columns: repeat(2, 1fr);
     gap: 0;
@@ -642,7 +649,8 @@ main {
     background: var(--paper);
   }
 
-  .primary-nav.is-open {
+  .primary-nav.is-open,
+  .site-header:focus-within .primary-nav {
     display: grid;
   }
 

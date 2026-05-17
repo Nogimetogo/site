@@ -11,6 +11,7 @@ const projects = [
   ...(window.architectureProjects || [])
 ];
 
+const supportsIntersectionObserver = "IntersectionObserver" in window;
 let currentSlide = 0;
 let slideTimer = window.setInterval(showNextSlide, 5000);
 
@@ -87,34 +88,47 @@ categoryButtons.forEach((button) => {
   });
 });
 
-const navObserver = new IntersectionObserver(
-  (entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+const navObserver = supportsIntersectionObserver
+  ? new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-    if (!visible) return;
+        if (!visible) return;
 
-    links.forEach((link) => {
-      link.classList.toggle("is-current", link.getAttribute("href") === `#${visible.target.id}`);
-    });
-  },
-  { threshold: [0.28, 0.5, 0.7] }
-);
+        links.forEach((link) => {
+          link.classList.toggle("is-current", link.getAttribute("href") === `#${visible.target.id}`);
+        });
+      },
+      { threshold: [0.28, 0.5, 0.7] }
+    )
+  : null;
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
-);
+const revealObserver = supportsIntersectionObserver
+  ? new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
+    )
+  : {
+      observe(item) {
+        item.classList.add("is-visible");
+      },
+      unobserve() {}
+    };
 
-document.querySelectorAll("section[id]").forEach((section) => navObserver.observe(section));
+document.documentElement.classList.add("reveal-ready");
+
+if (navObserver) {
+  document.querySelectorAll("section[id]").forEach((section) => navObserver.observe(section));
+}
 document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
 const requestedCategory = new URLSearchParams(window.location.search).get("category");
 const initialCategory = categoryButtons.some((button) => button.dataset.category === requestedCategory)
