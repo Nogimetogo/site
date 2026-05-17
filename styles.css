@@ -495,6 +495,7 @@ main {
 
 .photograph-detail {
   height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   padding: 72px clamp(18px, 8vw, 96px) 96px;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -616,6 +617,7 @@ main {
 
   .brand-block {
     gap: 12px;
+    min-width: 0;
   }
 
   .brand-tagline {
@@ -736,16 +738,30 @@ main {
 
   .photograph-detail {
     height: calc(100vh - var(--header-height));
-    padding: 44px 18px 72px;
+    height: calc(100dvh - var(--header-height));
+    padding: 24px 18px 54px;
   }
 
   .photograph-heading {
     top: var(--header-height);
-    padding: 16px 0 22px;
+    padding: 10px 0 16px;
+  }
+
+  .photograph-heading .project-title {
+    font-size: clamp(24px, 7vw, 34px);
+    line-height: 1.18;
   }
 }
 
 @media (max-width: 560px) {
+  .brand {
+    font-size: 24px;
+  }
+
+  .brand-tagline {
+    display: none;
+  }
+
   .hero-caption {
     display: grid;
     gap: 8px;
@@ -769,5 +785,13 @@ main {
     display: grid;
     gap: 10px;
     text-align: center;
+  }
+
+  .photograph-detail {
+    padding: 18px 14px 48px;
+  }
+
+  .photograph-heading {
+    padding-bottom: 12px;
   }
 }
