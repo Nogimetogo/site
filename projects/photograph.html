@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photograph | Nogime togo</title>
     <meta name="description" content="Nogime togoのPhotographコンセプトページ。">
-    <link rel="stylesheet" href="../styles.css?v=20260517-mobilefix">
+    <link rel="stylesheet" href="../styles.css?v=20260517-contact">
   </head>
   <body class="project-page photograph-page" data-return-url="../index.html?category=Photograph#gallery">
     <header class="site-header">
@@ -18,7 +18,7 @@
         <a href="../index.html?category=Photograph#gallery">PICK UP</a>
         <a href="../index.html#profile">PROFILE</a>
         <a href="../index.html#news">NEWS</a>
-        <a href="../index.html#contact">CONTACT</a>
+        <a href="../contact.html">CONTACT</a>
       </nav>
     </header>
 
@@ -135,7 +135,11 @@
       document.addEventListener("click", (event) => {
         if (event.target.closest("a")) return;
         if (event.target.closest("button")) return;
-        showNextImage();
+        if (event.target.closest(".photograph-images")) {
+          showNextImage();
+          return;
+        }
+        window.location.href = document.body.dataset.returnUrl;
       });
     </script>
   </body>
