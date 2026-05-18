@@ -494,6 +494,31 @@ main {
   color: var(--muted);
 }
 
+.site-contact-form {
+  padding: 34px 0 0;
+}
+
+.form-status {
+  min-height: 20px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.form-actions button:disabled {
+  cursor: wait;
+  opacity: 0.45;
+}
+
+.form-target {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .google-form-frame {
   width: 100%;
   overflow: hidden;
