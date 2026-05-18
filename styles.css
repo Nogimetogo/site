@@ -494,6 +494,20 @@ main {
   color: var(--muted);
 }
 
+.google-form-frame {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.google-form-frame iframe {
+  width: 100%;
+  min-height: 860px;
+  display: block;
+  border: 0;
+}
+
 .site-footer {
   position: fixed;
   right: 18px;
@@ -969,6 +983,14 @@ main {
 
   .contact-form-section {
     padding-top: 48px;
+  }
+
+  .google-form-frame {
+    margin: 0 -8px;
+  }
+
+  .google-form-frame iframe {
+    min-height: 920px;
   }
 
   .form-field label {
