@@ -3,8 +3,15 @@ const links = [...document.querySelectorAll(".primary-nav a")];
 const primaryNav = document.querySelector(".primary-nav");
 const menuButton = document.querySelector(".menu-button");
 const heroClickTarget = document.querySelector(".hero-click-target");
+const heroTitle = document.querySelector("[data-hero-title]");
 const galleryGrid = document.querySelector(".masonry-grid");
 const categoryButtons = [...document.querySelectorAll(".category-tabs button")];
+const heroItems = (window.photographProjects || []).flatMap((project) =>
+  (project.images || []).map((image) => ({
+    image,
+    title: project.title
+  }))
+);
 const projects = [
   ...(window.photographProjects || []),
   ...(window.nogimeProjects || []),
@@ -13,11 +20,34 @@ const projects = [
 
 const supportsIntersectionObserver = "IntersectionObserver" in window;
 let currentSlide = 0;
+let currentHeroImage = "";
 let slideTimer = window.setInterval(showNextSlide, 5000);
 
+function getRandomHeroItem() {
+  if (!heroItems.length) return null;
+  if (heroItems.length === 1) return heroItems[0];
+
+  let item = heroItems[Math.floor(Math.random() * heroItems.length)];
+  while (item.image === currentHeroImage) {
+    item = heroItems[Math.floor(Math.random() * heroItems.length)];
+  }
+  currentHeroImage = item.image;
+  return item;
+}
+
+function applyHeroItem(slide, item) {
+  if (!slide || !item) return;
+  slide.style.backgroundImage = `url("${assetUrl(item.image)}")`;
+  if (heroTitle) {
+    heroTitle.textContent = item.title;
+  }
+}
+
 function showSlide(index) {
+  const item = getRandomHeroItem();
   slides[currentSlide].classList.remove("is-active");
   currentSlide = (index + slides.length) % slides.length;
+  applyHeroItem(slides[currentSlide], item);
   slides[currentSlide].classList.add("is-active");
 }
 
@@ -62,6 +92,8 @@ function renderProjects(category) {
       revealObserver.observe(card);
     });
 }
+
+applyHeroItem(slides[currentSlide], getRandomHeroItem());
 
 heroClickTarget.addEventListener("click", () => {
   showNextSlide();

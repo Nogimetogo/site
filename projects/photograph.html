@@ -74,12 +74,21 @@
         const frames = [...document.querySelectorAll(".photograph-frame")];
         if (!frames.length) return;
         frames[currentImage].classList.remove("is-active");
-        currentImage = (index + frames.length) % frames.length;
+        currentImage = Math.min(Math.max(index, 0), frames.length - 1);
         frames[currentImage].classList.add("is-active");
+      }
+
+      function closeProject() {
+        window.location.href = document.body.dataset.returnUrl;
       }
 
       function showNextImage() {
         if (imageLocked) return;
+        const frames = [...document.querySelectorAll(".photograph-frame")];
+        if (currentImage >= frames.length - 1) {
+          closeProject();
+          return;
+        }
         imageLocked = true;
         showImage(currentImage + 1);
         window.setTimeout(() => {
@@ -139,7 +148,7 @@
           showNextImage();
           return;
         }
-        window.location.href = document.body.dataset.returnUrl;
+        closeProject();
       });
     </script>
   </body>
