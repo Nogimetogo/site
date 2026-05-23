@@ -43,10 +43,6 @@ const architectureCounterData = {
 };
 
 const formatCounterArea = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
-const formatCounterCost = new Intl.NumberFormat("ja-JP", {
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1
-});
 const formatCounterInteger = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 
 function getRandomHeroItem() {
@@ -110,7 +106,7 @@ function renderArchitectureCounter() {
     (architectureCounterData.target.costOkuYen - architectureCounterData.current.costOkuYen) * progress;
 
   architectureAreaCounter.textContent = formatCounterArea.format(area);
-  architectureCostCounter.textContent = formatCounterCost.format(costOkuYen / 10);
+  architectureCostCounter.textContent = formatCounterInteger.format(costOkuYen * 100);
   if (architecturePhotographCounter) {
     const photographCount = (window.photographProjects || []).reduce(
       (total, project) => total + (project.images || []).length,
