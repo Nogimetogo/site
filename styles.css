@@ -364,6 +364,17 @@ main {
   background: rgba(0, 0, 0, 0.18);
 }
 
+.work-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: rgba(32, 32, 32, 0.38);
+  border: 1px solid var(--line);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+}
+
 .work-card figcaption {
   position: absolute;
   left: 0;

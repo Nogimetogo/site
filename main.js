@@ -159,14 +159,23 @@ function renderProjects(category) {
         card.setAttribute("aria-label", `${project.title} project page`);
       }
 
-      const img = document.createElement("img");
-      img.src = assetUrl(project.cover || project.image);
-      img.alt = project.title;
+      const media = project.cover || project.image;
+      if (media) {
+        const img = document.createElement("img");
+        img.src = assetUrl(media);
+        img.alt = project.title;
+        card.append(img);
+      } else {
+        const placeholder = document.createElement("div");
+        placeholder.className = "work-card-placeholder";
+        placeholder.textContent = "TBD";
+        card.append(placeholder);
+      }
 
       const caption = document.createElement("figcaption");
       caption.innerHTML = `<strong>${project.title}</strong><span>${project.category} / ${project.year}</span>`;
 
-      card.append(img, caption);
+      card.append(caption);
       galleryGrid.append(card);
       revealObserver.observe(card);
     });
