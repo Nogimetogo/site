@@ -248,15 +248,24 @@ main {
   padding-top: 44px;
 }
 
+.gallery-controls {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin: -10px 0 28px;
+}
+
 .category-tabs {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
-  margin: -10px 0 28px;
+  margin: 0;
 }
 
 .category-tabs button {
   min-height: 38px;
+  min-width: 112px;
   padding: 0 18px;
   border: 1px solid var(--line);
   background: transparent;
@@ -274,10 +283,11 @@ main {
 }
 
 .architecture-counter {
-  margin: 0 0 4px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  min-height: 38px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .architecture-counter[hidden] {
@@ -286,7 +296,7 @@ main {
 
 .architecture-counter__metric {
   min-height: 38px;
-  padding: 0 18px;
+  padding: 0;
   display: grid;
   align-content: center;
   border: 0;
@@ -296,7 +306,7 @@ main {
 
 .architecture-counter__value {
   font-variant-numeric: tabular-nums;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
@@ -305,7 +315,7 @@ main {
 .architecture-counter__unit {
   margin-left: 6px;
   color: rgba(0, 0, 0, 0.9);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -979,6 +989,12 @@ main {
     gap: 10px;
   }
 
+  .gallery-controls {
+    display: grid;
+    gap: 12px;
+    margin: -4px 0 20px;
+  }
+
   .category-tabs {
     display: grid;
     grid-template-columns: 1fr;
@@ -991,14 +1007,20 @@ main {
   }
 
   .architecture-counter {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 58px;
+    margin-bottom: 0;
   }
 
   .architecture-counter__metric {
     min-height: 58px;
-    padding: 0 18px;
+    padding: 0;
+  }
+
+  .architecture-counter__value {
+    font-size: 18px;
   }
 
   .masonry-grid {
