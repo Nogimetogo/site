@@ -30,15 +30,18 @@ let slideTimer = window.setInterval(showNextSlide, 5000);
 let counterTimer = null;
 
 const architectureCounterData = {
-  current: {
+  baseDate: "2026-05-23T14:00:55+09:00",
+  base: {
     area: 449500,
     costOkuYen: 1872.7
   },
-  target: {
-    area: 499500,
-    costOkuYen: 2472.7
-  },
-  durationMs: 60000,
+  milestones: [
+    {
+      date: "2028-12-31T23:59:59+09:00",
+      area: 50000,
+      costOkuYen: 600
+    }
+  ],
   tickMs: 3000
 };
 
@@ -89,24 +92,35 @@ function assetUrl(path, prefix = "./") {
 }
 
 
-function easeOutCubic(value) {
-  return 1 - Math.pow(1 - value, 3);
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function getArchitectureCounterTotals(now = Date.now()) {
+  let previousDate = new Date(architectureCounterData.baseDate).getTime();
+  const totals = {
+    area: architectureCounterData.base.area,
+    costOkuYen: architectureCounterData.base.costOkuYen
+  };
+
+  architectureCounterData.milestones.forEach((milestone) => {
+    const milestoneDate = new Date(milestone.date).getTime();
+    const progress = clamp((now - previousDate) / (milestoneDate - previousDate), 0, 1);
+    totals.area += milestone.area * progress;
+    totals.costOkuYen += milestone.costOkuYen * progress;
+    previousDate = milestoneDate;
+  });
+
+  return totals;
 }
 
 function renderArchitectureCounter() {
   if (!architectureAreaCounter || !architectureCostCounter) return;
 
-  const cycle = Date.now() % architectureCounterData.durationMs;
-  const progress = easeOutCubic(cycle / architectureCounterData.durationMs);
-  const area =
-    architectureCounterData.current.area +
-    (architectureCounterData.target.area - architectureCounterData.current.area) * progress;
-  const costOkuYen =
-    architectureCounterData.current.costOkuYen +
-    (architectureCounterData.target.costOkuYen - architectureCounterData.current.costOkuYen) * progress;
+  const totals = getArchitectureCounterTotals();
 
-  architectureAreaCounter.textContent = formatCounterArea.format(area);
-  architectureCostCounter.textContent = formatCounterInteger.format(costOkuYen * 100);
+  architectureAreaCounter.textContent = formatCounterArea.format(totals.area);
+  architectureCostCounter.textContent = formatCounterInteger.format(totals.costOkuYen * 100000000);
   if (architecturePhotographCounter) {
     const photographCount = (window.photographProjects || []).reduce(
       (total, project) => total + (project.images || []).length,
