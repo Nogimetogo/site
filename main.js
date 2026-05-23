@@ -44,6 +44,10 @@ const architectureCounterData = {
   ],
   tickMs: 3000
 };
+const photographCounterData = {
+  baseDate: "2026-05-23T14:15:51+09:00",
+  yearlyCounts: [4154, 769, 276]
+};
 
 const formatCounterArea = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 const formatCounterInteger = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
@@ -114,6 +118,15 @@ function getArchitectureCounterTotals(now = Date.now()) {
   return totals;
 }
 
+function getPhotographCounterTotal(now = Date.now()) {
+  const baseDate = new Date(photographCounterData.baseDate).getTime();
+  const baseCount = photographCounterData.yearlyCounts.reduce((total, count) => total + count, 0);
+  const yearlyAverage = baseCount / photographCounterData.yearlyCounts.length;
+  const elapsedYears = Math.max(0, (now - baseDate) / (365.25 * 24 * 60 * 60 * 1000));
+
+  return baseCount + yearlyAverage * elapsedYears;
+}
+
 function renderArchitectureCounter() {
   if (!architectureAreaCounter || !architectureCostCounter) return;
 
@@ -122,11 +135,7 @@ function renderArchitectureCounter() {
   architectureAreaCounter.textContent = formatCounterArea.format(totals.area);
   architectureCostCounter.textContent = formatCounterInteger.format(totals.costOkuYen * 100000000);
   if (architecturePhotographCounter) {
-    const photographCount = (window.photographProjects || []).reduce(
-      (total, project) => total + (project.images || []).length,
-      0
-    );
-    architecturePhotographCounter.textContent = formatCounterInteger.format(photographCount);
+    architecturePhotographCounter.textContent = formatCounterInteger.format(getPhotographCounterTotal());
   }
 }
 
