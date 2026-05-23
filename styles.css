@@ -273,6 +273,42 @@ main {
   color: var(--paper);
 }
 
+.architecture-counter {
+  margin: 0 0 4px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.architecture-counter[hidden] {
+  display: none;
+}
+
+.architecture-counter__metric {
+  min-height: 38px;
+  padding: 0 18px;
+  display: grid;
+  align-content: center;
+  border: 0;
+  background: var(--paper);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.architecture-counter__value {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.architecture-counter__unit {
+  margin-left: 6px;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -952,6 +988,17 @@ main {
   .category-tabs button {
     min-height: 58px;
     font-size: 18px;
+  }
+
+  .architecture-counter {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .architecture-counter__metric {
+    min-height: 58px;
+    padding: 0 18px;
   }
 
   .masonry-grid {

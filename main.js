@@ -5,6 +5,9 @@ const menuButton = document.querySelector(".menu-button");
 const heroClickTarget = document.querySelector(".hero-click-target");
 const heroTitle = document.querySelector("[data-hero-title]");
 const galleryGrid = document.querySelector(".masonry-grid");
+const architectureCounter = document.querySelector(".architecture-counter");
+const architectureAreaCounter = document.querySelector("[data-counter-area]");
+const architectureCostCounter = document.querySelector("[data-counter-cost]");
 const categoryButtons = [...document.querySelectorAll(".category-tabs button")];
 const heroItems = (window.photographProjects || []).flatMap((project) =>
   (project.images || []).map((image) => ({
@@ -22,6 +25,26 @@ const supportsIntersectionObserver = "IntersectionObserver" in window;
 let currentSlide = 0;
 let currentHeroImage = "";
 let slideTimer = window.setInterval(showNextSlide, 5000);
+let counterTimer = null;
+
+const architectureCounterData = {
+  current: {
+    area: 449500,
+    costOkuYen: 1872.7
+  },
+  target: {
+    area: 499500,
+    costOkuYen: 2472.7
+  },
+  durationMs: 60000,
+  tickMs: 3000
+};
+
+const formatCounterArea = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
+const formatCounterCost = new Intl.NumberFormat("ja-JP", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1
+});
 
 function getRandomHeroItem() {
   if (!heroItems.length) return null;
@@ -66,8 +89,49 @@ function assetUrl(path, prefix = "./") {
   return `${prefix}${path}`;
 }
 
+
+function easeOutCubic(value) {
+  return 1 - Math.pow(1 - value, 3);
+}
+
+function renderArchitectureCounter() {
+  if (!architectureAreaCounter || !architectureCostCounter) return;
+
+  const cycle = Date.now() % architectureCounterData.durationMs;
+  const progress = easeOutCubic(cycle / architectureCounterData.durationMs);
+  const area =
+    architectureCounterData.current.area +
+    (architectureCounterData.target.area - architectureCounterData.current.area) * progress;
+  const costOkuYen =
+    architectureCounterData.current.costOkuYen +
+    (architectureCounterData.target.costOkuYen - architectureCounterData.current.costOkuYen) * progress;
+
+  architectureAreaCounter.textContent = formatCounterArea.format(area);
+  architectureCostCounter.textContent = formatCounterCost.format(costOkuYen / 10);
+}
+
+function setArchitectureCounterVisible(isVisible) {
+  if (!architectureCounter) return;
+
+  architectureCounter.hidden = !isVisible;
+
+  if (isVisible) {
+    renderArchitectureCounter();
+    if (!counterTimer) {
+      counterTimer = window.setInterval(renderArchitectureCounter, architectureCounterData.tickMs);
+    }
+    revealObserver.observe(architectureCounter);
+    return;
+  }
+
+  if (counterTimer) {
+    window.clearInterval(counterTimer);
+    counterTimer = null;
+  }
+}
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
+  setArchitectureCounterVisible(category === "Architecture");
 
   projects
     .filter((project) => project.category === category)
