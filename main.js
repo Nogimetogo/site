@@ -9,6 +9,7 @@ const architectureCounter = document.querySelector(".architecture-counter");
 const architectureAreaCounter = document.querySelector("[data-counter-area]");
 const architectureCostCounter = document.querySelector("[data-counter-cost]");
 const architecturePhotographCounter = document.querySelector("[data-counter-photograph]");
+const counterMetrics = [...document.querySelectorAll("[data-counter-category]")];
 const categoryButtons = [...document.querySelectorAll(".category-tabs button")];
 const heroItems = (window.photographProjects || []).flatMap((project) =>
   (project.images || []).map((image) => ({
@@ -119,28 +120,14 @@ function renderArchitectureCounter() {
   }
 }
 
-function setArchitectureCounterVisible(isVisible) {
-  if (!architectureCounter) return;
-
-  architectureCounter.hidden = !isVisible;
-
-  if (isVisible) {
-    renderArchitectureCounter();
-    if (!counterTimer) {
-      counterTimer = window.setInterval(renderArchitectureCounter, architectureCounterData.tickMs);
-    }
-    revealObserver.observe(architectureCounter);
-    return;
-  }
-
-  if (counterTimer) {
-    window.clearInterval(counterTimer);
-    counterTimer = null;
-  }
+function setCounterActiveCategory(category) {
+  counterMetrics.forEach((metric) => {
+    metric.classList.toggle("is-counter-active", metric.dataset.counterCategory === category);
+  });
 }
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
-  setArchitectureCounterVisible(category === "Architecture");
+  setCounterActiveCategory(category);
 
   projects
     .filter((project) => project.category === category)
@@ -167,6 +154,8 @@ function renderProjects(category) {
 }
 
 applyHeroItem(slides[currentSlide], getRandomHeroItem());
+renderArchitectureCounter();
+counterTimer = window.setInterval(renderArchitectureCounter, architectureCounterData.tickMs);
 
 heroClickTarget.addEventListener("click", () => {
   showNextSlide();
