@@ -283,11 +283,12 @@ main {
 }
 
 .architecture-counter {
-  min-height: 38px;
+  min-height: 86px;
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(152px, max-content));
+  gap: 10px 18px;
+  align-content: start;
 }
 
 .architecture-counter[hidden] {
@@ -299,9 +300,17 @@ main {
   padding: 0;
   display: grid;
   align-content: center;
+  gap: 5px;
   border: 0;
   background: var(--paper);
   color: rgba(0, 0, 0, 0.9);
+}
+
+.architecture-counter__label {
+  color: rgba(0, 0, 0, 0.62);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
 }
 
 .architecture-counter__value {
@@ -1007,16 +1016,19 @@ main {
   }
 
   .architecture-counter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    min-height: 58px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 12px;
+    min-height: 0;
     margin-bottom: 0;
   }
 
   .architecture-counter__metric {
     min-height: 58px;
     padding: 0;
+  }
+
+  .architecture-counter__label {
+    font-size: 10px;
   }
 
   .architecture-counter__value {

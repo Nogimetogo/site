@@ -8,6 +8,7 @@ const galleryGrid = document.querySelector(".masonry-grid");
 const architectureCounter = document.querySelector(".architecture-counter");
 const architectureAreaCounter = document.querySelector("[data-counter-area]");
 const architectureCostCounter = document.querySelector("[data-counter-cost]");
+const architecturePhotographCounter = document.querySelector("[data-counter-photograph]");
 const categoryButtons = [...document.querySelectorAll(".category-tabs button")];
 const heroItems = (window.photographProjects || []).flatMap((project) =>
   (project.images || []).map((image) => ({
@@ -45,6 +46,7 @@ const formatCounterCost = new Intl.NumberFormat("ja-JP", {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1
 });
+const formatCounterInteger = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 
 function getRandomHeroItem() {
   if (!heroItems.length) return null;
@@ -108,6 +110,13 @@ function renderArchitectureCounter() {
 
   architectureAreaCounter.textContent = formatCounterArea.format(area);
   architectureCostCounter.textContent = formatCounterCost.format(costOkuYen / 10);
+  if (architecturePhotographCounter) {
+    const photographCount = (window.photographProjects || []).reduce(
+      (total, project) => total + (project.images || []).length,
+      0
+    );
+    architecturePhotographCounter.textContent = formatCounterInteger.format(photographCount);
+  }
 }
 
 function setArchitectureCounterVisible(isVisible) {
