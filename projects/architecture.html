@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
@@ -69,6 +69,12 @@
           img.src = assetUrl(image);
           img.alt = `${project.title} image ${index + 1}`;
           figure.append(img);
+          const captionText = project.imageCaptions?.[index];
+          if (captionText) {
+            const caption = document.createElement("figcaption");
+            caption.textContent = captionText;
+            figure.append(caption);
+          }
           images.append(figure);
         });
       }

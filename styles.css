@@ -698,6 +698,13 @@ main {
   object-fit: contain;
 }
 
+.project-images figcaption {
+  padding: 8px 10px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .project-return {
   position: fixed;
   right: 18px;
