@@ -168,7 +168,7 @@ function renderProjects(category) {
       } else {
         const placeholder = document.createElement("div");
         placeholder.className = "work-card-placeholder";
-        placeholder.textContent = "TBD";
+        placeholder.textContent = "";
         card.append(placeholder);
       }
 
