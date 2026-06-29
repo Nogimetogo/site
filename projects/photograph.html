@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photograph | Nogime togo</title>
     <meta name="description" content="Nogime togoのPhotographコンセプトページ。">
-    <link rel="stylesheet" href="../styles.css?v=20260517-photoadd">
+    <link rel="stylesheet" href="../styles.css?v=20260629-photo-nav-below">
   </head>
   <body class="project-page photograph-page" data-return-url="../index.html?category=Photograph#gallery">
     <header class="site-header">
@@ -29,7 +29,14 @@
           <h1 class="project-title" data-project-title></h1>
         </div>
 
-        <div class="photograph-images" data-project-images aria-label="Photograph concept images"></div>
+        <div class="photograph-images" data-project-images aria-label="Photograph concept images">
+          <button class="photograph-nav photograph-nav--previous" type="button" data-image-previous aria-label="前の画像に戻る" disabled>
+            <span aria-hidden="true">&#8592;</span>
+          </button>
+          <button class="photograph-nav photograph-nav--next" type="button" data-image-next aria-label="次の画像に進む">
+            <span aria-hidden="true">&#8594;</span>
+          </button>
+        </div>
       </article>
     </main>
 
@@ -76,6 +83,14 @@
         frames[currentImage].classList.remove("is-active");
         currentImage = Math.min(Math.max(index, 0), frames.length - 1);
         frames[currentImage].classList.add("is-active");
+        updateImageNavigation(frames.length);
+      }
+
+      function updateImageNavigation(imageCount = document.querySelectorAll(".photograph-frame").length) {
+        const previousButton = document.querySelector("[data-image-previous]");
+        const nextButton = document.querySelector("[data-image-next]");
+        previousButton.disabled = currentImage <= 0;
+        nextButton.disabled = imageCount === 0 || currentImage >= imageCount - 1;
       }
 
       function closeProject() {
@@ -85,10 +100,7 @@
       function showNextImage() {
         if (imageLocked) return;
         const frames = [...document.querySelectorAll(".photograph-frame")];
-        if (currentImage >= frames.length - 1) {
-          closeProject();
-          return;
-        }
+        if (currentImage >= frames.length - 1) return;
         imageLocked = true;
         showImage(currentImage + 1);
         window.setTimeout(() => {
@@ -97,7 +109,7 @@
       }
 
       function showPreviousImage() {
-        if (imageLocked) return;
+        if (imageLocked || currentImage <= 0) return;
         imageLocked = true;
         showImage(currentImage - 1);
         window.setTimeout(() => {
@@ -124,12 +136,23 @@
 
       window.addEventListener("touchend", (event) => {
         const touch = event.changedTouches[0];
-        const dx = Math.abs(touch.clientX - touchStartX);
-        const dy = Math.abs(touch.clientY - touchStartY);
-        if (dx > 16 || dy > 16) {
-          showNextImage();
-        }
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) <= 16) return;
+        const movement = Math.abs(dx) >= Math.abs(dy) ? dx : dy;
+        if (movement < 0) showNextImage();
+        else showPreviousImage();
       }, { passive: true });
+
+      document.querySelector("[data-image-previous]").addEventListener("click", showPreviousImage);
+      document.querySelector("[data-image-next]").addEventListener("click", showNextImage);
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") showPreviousImage();
+        if (event.key === "ArrowRight") showNextImage();
+      });
+
+      updateImageNavigation();
 
       const primaryNav = document.querySelector(".primary-nav");
       const menuButton = document.querySelector(".menu-button");
