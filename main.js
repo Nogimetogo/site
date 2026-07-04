@@ -11,12 +11,25 @@ const architectureCostCounter = document.querySelector("[data-counter-cost]");
 const architecturePhotographCounter = document.querySelector("[data-counter-photograph]");
 const counterMetrics = [...document.querySelectorAll("[data-counter-category]")];
 const categoryButtons = [...document.querySelectorAll(".category-tabs button")];
-const heroItems = (window.photographProjects || []).flatMap((project) =>
+const photographHeroItems = (window.photographProjects || []).flatMap((project) =>
   (project.images || []).map((image) => ({
     image,
     title: project.title
   }))
 );
+const architectureHeroItems = (window.architectureProjects || [])
+  .filter((project) => project.cover)
+  .map((project) => ({
+    image: project.cover,
+    title: project.title
+  }));
+const heroRatioPattern = [
+  "Photograph",
+  "Photograph",
+  "Photograph",
+  "Photograph",
+  "Architecture"
+];
 const projects = [
   ...(window.photographProjects || []),
   ...(window.nogimeProjects || []),
@@ -26,6 +39,7 @@ const projects = [
 const supportsIntersectionObserver = "IntersectionObserver" in window;
 let currentSlide = 0;
 let currentHeroImage = "";
+let heroRatioIndex = Math.floor(Math.random() * heroRatioPattern.length);
 let slideTimer = window.setInterval(showNextSlide, 5000);
 let counterTimer = null;
 
@@ -53,13 +67,17 @@ const formatCounterArea = new Intl.NumberFormat("ja-JP", { maximumFractionDigits
 const formatCounterInteger = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 
 function getRandomHeroItem() {
-  if (!heroItems.length) return null;
-  if (heroItems.length === 1) return heroItems[0];
+  const category = heroRatioPattern[heroRatioIndex];
+  heroRatioIndex = (heroRatioIndex + 1) % heroRatioPattern.length;
 
-  let item = heroItems[Math.floor(Math.random() * heroItems.length)];
-  while (item.image === currentHeroImage) {
-    item = heroItems[Math.floor(Math.random() * heroItems.length)];
-  }
+  const preferredItems = category === "Architecture" ? architectureHeroItems : photographHeroItems;
+  const fallbackItems = category === "Architecture" ? photographHeroItems : architectureHeroItems;
+  const pool = preferredItems.length ? preferredItems : fallbackItems;
+  if (!pool.length) return null;
+
+  const nonRepeatingItems = pool.filter((item) => item.image !== currentHeroImage);
+  const candidates = nonRepeatingItems.length ? nonRepeatingItems : pool;
+  const item = candidates[Math.floor(Math.random() * candidates.length)];
   currentHeroImage = item.image;
   return item;
 }
