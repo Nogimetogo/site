@@ -63,6 +63,10 @@ const photographCounterData = {
   yearlyCounts: [4154, 769, 276]
 };
 
+const fixedCounterValues = {
+  projectValue: 190480969479,
+  photographImages: 5441
+};
 const formatCounterArea = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 const formatCounterInteger = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 
@@ -151,9 +155,9 @@ function renderArchitectureCounter() {
   const totals = getArchitectureCounterTotals();
 
   architectureAreaCounter.textContent = formatCounterArea.format(totals.area);
-  architectureCostCounter.textContent = formatCounterInteger.format(totals.costOkuYen * 100000000);
+  architectureCostCounter.textContent = `¥${formatCounterInteger.format(fixedCounterValues.projectValue)}`;
   if (architecturePhotographCounter) {
-    architecturePhotographCounter.textContent = formatCounterInteger.format(getPhotographCounterTotal());
+    architecturePhotographCounter.textContent = formatCounterInteger.format(fixedCounterValues.photographImages);
   }
 }
 
