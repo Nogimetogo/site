@@ -456,6 +456,14 @@ main {
   letter-spacing: 0.03em;
 }
 
+.profile-copy h3 {
+  margin: 30px 0 10px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
 .profile-copy .lead {
   color: var(--ink);
   font-size: 15px;
