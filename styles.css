@@ -449,6 +449,12 @@ main {
   font-size: 14px;
   line-height: 2;
 }
+.profile-copy .profile-credentials {
+  margin: -12px 0 20px;
+  font-size: 12px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+}
 
 .profile-copy .lead {
   color: var(--ink);
