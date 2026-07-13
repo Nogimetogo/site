@@ -163,7 +163,8 @@ function renderArchitectureCounter() {
 
 function setCounterActiveCategory(category) {
   counterMetrics.forEach((metric) => {
-    metric.classList.toggle("is-counter-active", metric.dataset.counterCategory === category);
+    const categories = metric.dataset.counterCategory.split(/\s+/);
+    metric.classList.toggle("is-counter-active", categories.includes(category));
   });
 }
 function renderProjects(category) {
