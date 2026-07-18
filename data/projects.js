@@ -1,5 +1,29 @@
 window.nogimeProjects = [
   {
+    slug: "developing",
+    title: "Developing",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat",
+    summary: [],
+    cover: "assets/projects/art-press/developing/density.jpg",
+    images: [
+      "assets/projects/art-press/developing/density.jpg",
+      "assets/projects/art-press/developing/conception.jpg",
+      "assets/projects/art-press/developing/moon.jpg",
+      "assets/projects/art-press/developing/mirage.jpg"
+    ],
+    imageCaptions: [
+      "密度 / Density",
+      "形 / Conception",
+      "月 / Moon",
+      "蜃気楼 / Mirage"
+    ],
+    url: "./projects/art-press.html?slug=developing"
+  },
+  {
     slug: "city-of-art-09",
     title: "City of Art no9",
     category: "Art/Press",

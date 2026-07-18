@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Art/Press | Nogime togo</title>
     <meta name="description" content="Nogime togoのArt/Pressアーカイブ。">
-    <link rel="stylesheet" href="../styles.css?v=20260713-art-press">
+    <link rel="stylesheet" href="../styles.css?v=20260718-bookmat-soft-bevel">
   </head>
   <body class="project-page" data-return-url="../index.html?category=Art%2FPress#gallery">
     <header class="site-header">
@@ -25,7 +25,7 @@
     <main class="project-main">
       <article class="project-hero">
         <div class="project-meta reveal">
-          <p class="project-kicker">Art/Press / <span data-project-year></span></p>
+          <p class="project-kicker"><span data-project-kicker>Art/Press</span> / <span data-project-year></span></p>
           <h1 class="project-title" data-project-title></h1>
           <div class="project-summary" data-project-summary></div>
         </div>
@@ -36,7 +36,7 @@
 
     <div class="project-return">Click anywhere to return</div>
 
-    <script src="../data/projects.js?v=20260713-no12-earth"></script>
+    <script src="../data/projects.js?v=20260718-developing"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
@@ -50,9 +50,11 @@
 
       if (project) {
         document.title = `${project.title} | Nogime togo`;
+        document.querySelector("[data-project-kicker]").textContent = project.kicker || project.category;
         document.querySelector("[data-project-year]").textContent = project.year;
         document.querySelector("[data-project-title]").textContent = project.title;
         document.querySelector("[data-project-images]").setAttribute("aria-label", `${project.title} images`);
+        document.body.classList.toggle("art-gallery-page", project.presentation === "bookmat");
 
         const summary = document.querySelector("[data-project-summary]");
         project.summary.forEach((text) => {
@@ -64,14 +66,26 @@
         const images = document.querySelector("[data-project-images]");
         project.images.forEach((image, index) => {
           const figure = document.createElement("figure");
-          figure.className = "reveal";
+          figure.className = project.presentation === "bookmat" ? "reveal bookmat-work" : "reveal";
           const img = document.createElement("img");
           img.src = assetUrl(image);
-          img.alt = `${project.title} image ${index + 1}`;
+          img.alt = project.imageCaptions?.[index] || `${project.title} image ${index + 1}`;
           img.addEventListener("error", () => {
             figure.remove();
           }, { once: true });
-          figure.append(img);
+
+          if (project.presentation === "bookmat") {
+            const mat = document.createElement("div");
+            mat.className = "bookmat";
+            const window = document.createElement("div");
+            window.className = "bookmat__window";
+            window.append(img);
+            mat.append(window);
+            figure.append(mat);
+          } else {
+            figure.append(img);
+          }
+
           const captionText = project.imageCaptions?.[index];
           if (captionText) {
             const caption = document.createElement("figcaption");
