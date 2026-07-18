@@ -36,7 +36,7 @@
 
     <div class="project-return">Click anywhere to return</div>
 
-    <script src="../data/projects.js?v=20260718-transfiguration2"></script>
+    <script src="../data/projects.js?v=20260718-silent-interfaces"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
@@ -54,7 +54,8 @@
         document.querySelector("[data-project-year]").textContent = project.year;
         document.querySelector("[data-project-title]").textContent = project.title;
         document.querySelector("[data-project-images]").setAttribute("aria-label", `${project.title} images`);
-        document.body.classList.toggle("art-gallery-page", project.presentation === "bookmat");
+        const usesBookmat = project.presentation?.startsWith("bookmat");
+        document.body.classList.toggle("art-gallery-page", usesBookmat);
 
         const summary = document.querySelector("[data-project-summary]");
         project.summary.forEach((text) => {
@@ -66,7 +67,7 @@
         const images = document.querySelector("[data-project-images]");
         project.images.forEach((image, index) => {
           const figure = document.createElement("figure");
-          figure.className = project.presentation === "bookmat" ? "reveal bookmat-work" : "reveal";
+          figure.className = usesBookmat ? "reveal bookmat-work" : "reveal";
           const img = document.createElement("img");
           img.src = assetUrl(image);
           img.alt = project.imageCaptions?.[index] || `${project.title} image ${index + 1}`;
@@ -74,11 +75,24 @@
             figure.remove();
           }, { once: true });
 
-          if (project.presentation === "bookmat") {
+          if (usesBookmat) {
             const mat = document.createElement("div");
             mat.className = "bookmat";
             const window = document.createElement("div");
             window.className = "bookmat__window";
+
+            if (project.presentation === "bookmat-fit") {
+              const [width, height] = project.imageDimensions?.[index] || [];
+              if (width && height) {
+                const ratio = width / height;
+                const apertureWidth = Math.min(245, 194 * ratio);
+                const apertureHeight = apertureWidth / ratio;
+                window.style.width = `${(apertureWidth / 305) * 100}%`;
+                window.style.height = `${(apertureHeight / 254) * 100}%`;
+                window.style.aspectRatio = `${width} / ${height}`;
+              }
+            }
+
             window.append(img);
             mat.append(window);
             figure.append(mat);

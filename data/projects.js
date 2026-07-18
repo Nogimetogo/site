@@ -1,5 +1,31 @@
 window.nogimeProjects = [
   {
+    slug: "silent-interfaces",
+    title: "Silent Interfaces",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit",
+    summary: [],
+    cover: "assets/projects/art-press/silent-interfaces/piece-01.jpg",
+    images: [
+      "assets/projects/art-press/silent-interfaces/piece-01.jpg",
+      "assets/projects/art-press/silent-interfaces/piece-02.jpg",
+      "assets/projects/art-press/silent-interfaces/piece-03.jpg",
+      "assets/projects/art-press/silent-interfaces/piece-04.jpg",
+      "assets/projects/art-press/silent-interfaces/piece-05.jpg"
+    ],
+    imageDimensions: [
+      [6144, 4096],
+      [6144, 4096],
+      [4488, 5608],
+      [4240, 5936],
+      [4240, 5936]
+    ],
+    url: "./projects/art-press.html?slug=silent-interfaces"
+  },
+  {
     slug: "transfiguration-2",
     title: "Transfiguration2",
     category: "Art/Press",
