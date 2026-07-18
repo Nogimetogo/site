@@ -169,6 +169,7 @@ function setCounterActiveCategory(category) {
 }
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
+  galleryGrid.classList.toggle("is-art-gallery", category === "Art/Press");
   setCounterActiveCategory(category);
 
   projects
