@@ -1,7 +1,7 @@
 window.nogimeProjects = [
   {
     slug: "developing",
-    title: "Developing",
+    title: "Transfiguration/リバーシブル空間のための抽象画",
     category: "Art/Press",
     kicker: "Art",
     year: "2026",
