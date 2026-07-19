@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photograph | Nogime togo</title>
     <meta name="description" content="Nogime togoのPhotograph作品を、製本された写真集のように閲覧できます。">
-    <link rel="stylesheet" href="../styles.css?v=20260719-blended-spine-groove">
+    <link rel="stylesheet" href="../styles.css?v=20260719-section-two-worlds">
   </head>
   <body class="photo-book-page" data-return-url="../index.html?category=Photograph#gallery">
     <header class="book-header">
@@ -35,6 +35,9 @@
               <img data-right-image alt="">
             </div>
           </figure>
+          <div class="book-spread__full" data-full-spread>
+            <img data-full-spread-image alt="">
+          </div>
           <span class="book-gutter" aria-hidden="true"></span>
         </div>
       </section>
@@ -48,6 +51,7 @@
     </main>
 
     <script src="../data/photograph-projects.js?v=20260719-photobook"></script>
+    <script src="../data/photograph-projects-6.js?v=20260719-section-two-worlds"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
@@ -59,11 +63,19 @@
       const nextButton = document.querySelector("[data-next-page]");
       const leftImage = document.querySelector("[data-left-image]");
       const rightImage = document.querySelector("[data-right-image]");
+      const spreadElement = document.querySelector("[data-book-spread]");
+      const fullSpreadImage = document.querySelector("[data-full-spread-image]");
       const hint = document.querySelector("[data-book-hint]");
       const currentSpread = document.querySelector("[data-current-spread]");
       const totalSpreads = document.querySelector("[data-total-spreads]");
       const coverFadeDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 420;
       let spread = -1;
+      const projectSpreads = project?.spreads?.length
+        ? project.spreads
+        : Array.from({ length: Math.ceil((project?.images?.length || 0) / 2) }, (_, index) => ({
+            left: project.images[index * 2],
+            right: project.images[index * 2 + 1]
+          }));
 
       function getPhotographCoverTheme(item) {
         if (item.slug.startsWith("roof-")) return "beige";
@@ -98,13 +110,25 @@
       }
 
       function renderSpread() {
+        const spreadData = projectSpreads[spread];
         const leftIndex = spread * 2;
         const rightIndex = leftIndex + 1;
-        setPageImage(leftImage, project.images[leftIndex], leftIndex);
-        setPageImage(rightImage, project.images[rightIndex], rightIndex);
+        const isFullSpread = Boolean(spreadData?.full);
+        spreadElement.classList.toggle("is-full-spread", isFullSpread);
+        if (isFullSpread) {
+          fullSpreadImage.src = assetUrl(spreadData.full);
+          fullSpreadImage.alt = `${project.title} 見開き写真`;
+          setPageImage(leftImage, null, leftIndex);
+          setPageImage(rightImage, null, rightIndex);
+        } else {
+          fullSpreadImage.removeAttribute("src");
+          fullSpreadImage.alt = "";
+          setPageImage(leftImage, spreadData?.left, leftIndex);
+          setPageImage(rightImage, spreadData?.right, rightIndex);
+        }
         currentSpread.textContent = String(spread + 1);
         previousButton.disabled = false;
-        nextButton.disabled = spread >= Math.ceil(project.images.length / 2) - 1;
+        nextButton.disabled = spread >= projectSpreads.length - 1;
       }
 
       function openBook() {
@@ -130,7 +154,7 @@
 
       function turnTo(nextSpread) {
         if (nextSpread < 0) return;
-        if (nextSpread >= Math.ceil(project.images.length / 2)) {
+        if (nextSpread >= projectSpreads.length) {
           closeProject();
           return;
         }
@@ -161,7 +185,7 @@
         const coverImage = document.querySelector("[data-cover-image]");
         coverImage.src = assetUrl(project.cover || project.images[0]);
         coverImage.alt = `${project.title} 表紙`;
-        totalSpreads.textContent = String(Math.ceil(project.images.length / 2));
+        totalSpreads.textContent = String(projectSpreads.length);
         nextButton.disabled = false;
       } else {
         document.querySelector("[data-cover-title]").textContent = "Photograph";

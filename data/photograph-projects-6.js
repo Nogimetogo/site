@@ -1,0 +1,50 @@
+window.photographProjects = window.photographProjects || [];
+
+window.photographProjects.push({
+  slug: "section-two-worlds",
+  title: "6.0 断面とは二つの世界を同時に可視化する形式である",
+  category: "Photograph",
+  year: "2026",
+  summary: [],
+  cover: "assets/projects/photograph/concepts/section-two-worlds/DSCF1913.webp",
+  images: [
+    "assets/projects/photograph/concepts/section-two-worlds/DSCF1913.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/DSCF1912.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000326.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000330.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000136.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000137.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000139.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000140.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000182.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000243.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/DSCF2890.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/DSCF2885.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000291.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000404.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000405.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000414.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000795.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000796.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000728.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000755.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000573.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/DSCF2995.webp",
+    "assets/projects/photograph/concepts/section-two-worlds/L1000627.webp"
+  ],
+  spreads: [
+    { left: "assets/projects/photograph/concepts/section-two-worlds/DSCF1913.webp", right: "assets/projects/photograph/concepts/section-two-worlds/DSCF1912.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000326.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000330.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000136.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000137.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000139.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000140.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000182.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000243.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/DSCF2890.webp", right: "assets/projects/photograph/concepts/section-two-worlds/DSCF2885.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000291.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000404.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000405.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000414.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000795.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000796.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000728.webp", right: "assets/projects/photograph/concepts/section-two-worlds/L1000755.webp" },
+    { left: "assets/projects/photograph/concepts/section-two-worlds/L1000573.webp", right: "assets/projects/photograph/concepts/section-two-worlds/DSCF2995.webp" },
+    { full: "assets/projects/photograph/concepts/section-two-worlds/L1000627.webp" }
+  ],
+  url: "./projects/photograph.html?slug=section-two-worlds"
+});
