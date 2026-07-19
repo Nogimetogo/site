@@ -1597,14 +1597,32 @@ main {
   z-index: 6;
   inset: 0;
   pointer-events: none;
+  background-image: url("./assets/textures/book-cloth.webp");
+  background-position: 37% 63%;
+  background-size: 360px 360px;
+  mix-blend-mode: soft-light;
+  opacity: 0.52;
+}
+
+.book-cover::before {
+  content: "";
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  bottom: 0;
+  left: 3.6%;
+  width: 4.2%;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 24% 35%, rgba(63, 61, 56, 0.12) 0 0.35px, transparent 0.7px),
-    radial-gradient(circle at 68% 74%, rgba(255, 255, 255, 0.82) 0 0.4px, transparent 0.8px),
-    radial-gradient(circle at 47% 18%, rgba(70, 67, 61, 0.08) 0 0.3px, transparent 0.7px),
-    repeating-linear-gradient(4deg, rgba(67, 64, 59, 0.02) 0 1px, transparent 1px 4px);
-  background-size: 5px 6px, 7px 8px, 9px 7px, 100% 100%;
-  mix-blend-mode: multiply;
-  opacity: 0.38;
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.16) 32%,
+      rgba(0, 0, 0, 0.28) 48%,
+      rgba(255, 255, 255, 0.12) 66%,
+      rgba(255, 255, 255, 0.02) 100%);
+  box-shadow:
+    -2px 0 4px rgba(0, 0, 0, 0.08),
+    2px 0 4px rgba(255, 255, 255, 0.04);
 }
 
 .photo-book.is-closed {
@@ -1638,6 +1656,7 @@ main {
   line-height: 1.5;
   letter-spacing: 0.045em;
   text-align: center;
+  z-index: 8;
 }
 
 .cover-author {
@@ -1649,6 +1668,7 @@ main {
   font-size: clamp(8px, 0.68vw, 11px);
   color: var(--photograph-cover-secondary, #686762);
   text-align: center;
+  z-index: 8;
 }
 
 .cover-image {
@@ -1659,6 +1679,7 @@ main {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #e9e9e6;
+  z-index: 8;
 }
 
 .cover-image img {
@@ -1885,28 +1906,52 @@ main {
 
 .work-card.is-photograph-book::after {
   z-index: 3;
-  background:
-    radial-gradient(circle at 24% 35%, rgba(63, 61, 56, 0.11) 0 0.3px, transparent 0.7px),
-    radial-gradient(circle at 68% 74%, rgba(255, 255, 255, 0.8) 0 0.4px, transparent 0.8px),
-    repeating-linear-gradient(4deg, rgba(67, 64, 59, 0.018) 0 1px, transparent 1px 4px);
-  background-size: 5px 6px, 7px 8px, 100% 100%;
-  mix-blend-mode: multiply;
-  opacity: 0.34;
+  background-image: url("./assets/textures/book-cloth.webp");
+  background-position: 37% 63%;
+  background-size: 360px 360px;
+  mix-blend-mode: soft-light;
+  opacity: 0.52;
   pointer-events: none;
 }
 
 .work-card.is-photograph-book:hover::after {
-  background:
-    radial-gradient(circle at 24% 35%, rgba(63, 61, 56, 0.11) 0 0.3px, transparent 0.7px),
-    radial-gradient(circle at 68% 74%, rgba(255, 255, 255, 0.8) 0 0.4px, transparent 0.8px),
-    repeating-linear-gradient(4deg, rgba(67, 64, 59, 0.018) 0 1px, transparent 1px 4px);
-  background-size: 5px 6px, 7px 8px, 100% 100%;
+  background-image: url("./assets/textures/book-cloth.webp");
+  background-size: 360px 360px;
+}
+
+.work-card.is-photograph-book:nth-child(3n + 2)::after {
+  background-position: 68% 24%;
+}
+
+.work-card.is-photograph-book:nth-child(3n + 3)::after {
+  background-position: 14% 82%;
 }
 
 .photograph-cover-thumbnail {
   position: absolute;
   inset: 0;
   color: var(--photograph-cover-ink, #232321);
+}
+
+.photograph-cover-thumbnail::before {
+  content: "";
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  bottom: 0;
+  left: 3.6%;
+  width: 4.2%;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.16) 32%,
+      rgba(0, 0, 0, 0.28) 48%,
+      rgba(255, 255, 255, 0.12) 66%,
+      rgba(255, 255, 255, 0.02) 100%);
+  box-shadow:
+    -1px 0 3px rgba(0, 0, 0, 0.08),
+    1px 0 3px rgba(255, 255, 255, 0.04);
 }
 
 .photograph-cover-thumbnail__image {
@@ -1917,6 +1962,7 @@ main {
   aspect-ratio: 1;
   overflow: hidden;
   background: #e9e9e6;
+  z-index: 4;
 }
 
 .photograph-cover-thumbnail__image img {
@@ -1941,6 +1987,7 @@ main {
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0.045em;
+  z-index: 4;
 }
 
 @media (max-width: 900px) {
