@@ -1786,21 +1786,26 @@ main {
 .book-spread__full {
   position: absolute;
   z-index: 3;
-  inset: 3.94% 2%;
+  inset: 5mm;
+  box-sizing: border-box;
   display: none;
-  place-items: center;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
   pointer-events: none;
 }
 
 .book-spread__full img {
   display: block;
-  width: 100%;
+  width: auto;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
 .book-spread.is-full-spread .book-spread__full {
-  display: grid;
+  display: flex;
 }
 
 .book-gutter {
