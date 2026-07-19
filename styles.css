@@ -1599,9 +1599,9 @@ main {
   pointer-events: none;
   background-image: url("./assets/textures/book-cloth.webp");
   background-position: 37% 63%;
-  background-size: 360px 360px;
+  background-size: 520px 520px;
   mix-blend-mode: soft-light;
-  opacity: 0.52;
+  opacity: 0.58;
 }
 
 .book-cover::before {
@@ -1610,8 +1610,8 @@ main {
   z-index: 9;
   top: 0;
   bottom: 0;
-  left: 3.6%;
-  width: 4.2%;
+  left: 1.8%;
+  width: 3.8%;
   pointer-events: none;
   background:
     linear-gradient(90deg,
@@ -1619,7 +1619,14 @@ main {
       rgba(0, 0, 0, 0.16) 32%,
       rgba(0, 0, 0, 0.28) 48%,
       rgba(255, 255, 255, 0.12) 66%,
-      rgba(255, 255, 255, 0.02) 100%);
+      rgba(255, 255, 255, 0.02) 100%),
+    radial-gradient(ellipse at 35% 18%, rgba(0, 0, 0, 0.18), transparent 58%),
+    radial-gradient(ellipse at 68% 73%, rgba(255, 255, 255, 0.09), transparent 62%),
+    url("./assets/textures/book-cloth.webp");
+  background-size: 100% 100%, 100% 34%, 100% 46%, 150px 260px;
+  background-position: center, center top, center bottom, 29% 67%;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-blend-mode: normal, multiply, screen, soft-light;
   box-shadow:
     -2px 0 4px rgba(0, 0, 0, 0.08),
     2px 0 4px rgba(255, 255, 255, 0.04);
@@ -1908,15 +1915,15 @@ main {
   z-index: 3;
   background-image: url("./assets/textures/book-cloth.webp");
   background-position: 37% 63%;
-  background-size: 360px 360px;
+  background-size: 520px 520px;
   mix-blend-mode: soft-light;
-  opacity: 0.52;
+  opacity: 0.58;
   pointer-events: none;
 }
 
 .work-card.is-photograph-book:hover::after {
   background-image: url("./assets/textures/book-cloth.webp");
-  background-size: 360px 360px;
+  background-size: 520px 520px;
 }
 
 .work-card.is-photograph-book:nth-child(3n + 2)::after {
@@ -1939,8 +1946,8 @@ main {
   z-index: 6;
   top: 0;
   bottom: 0;
-  left: 3.6%;
-  width: 4.2%;
+  left: 1.8%;
+  width: 3.8%;
   pointer-events: none;
   background:
     linear-gradient(90deg,
@@ -1948,10 +1955,27 @@ main {
       rgba(0, 0, 0, 0.16) 32%,
       rgba(0, 0, 0, 0.28) 48%,
       rgba(255, 255, 255, 0.12) 66%,
-      rgba(255, 255, 255, 0.02) 100%);
+      rgba(255, 255, 255, 0.02) 100%),
+    radial-gradient(ellipse at 35% 18%, rgba(0, 0, 0, 0.18), transparent 58%),
+    radial-gradient(ellipse at 68% 73%, rgba(255, 255, 255, 0.09), transparent 62%),
+    url("./assets/textures/book-cloth.webp");
+  background-size: 100% 100%, 100% 34%, 100% 46%, 150px 260px;
+  background-position: center, center top, center bottom, var(--groove-texture-x, 29%) var(--groove-texture-y, 67%);
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-blend-mode: normal, multiply, screen, soft-light;
   box-shadow:
     -1px 0 3px rgba(0, 0, 0, 0.08),
     1px 0 3px rgba(255, 255, 255, 0.04);
+}
+
+.work-card.is-photograph-book:nth-child(3n + 2) {
+  --groove-texture-x: 71%;
+  --groove-texture-y: 22%;
+}
+
+.work-card.is-photograph-book:nth-child(3n + 3) {
+  --groove-texture-x: 13%;
+  --groove-texture-y: 86%;
 }
 
 .photograph-cover-thumbnail__image {
