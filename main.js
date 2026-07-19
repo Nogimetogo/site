@@ -170,13 +170,17 @@ function setCounterActiveCategory(category) {
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
   galleryGrid.classList.toggle("is-art-gallery", category === "Art/Press");
+  galleryGrid.classList.toggle("is-photograph-gallery", category === "Photograph");
   setCounterActiveCategory(category);
 
   projects
     .filter((project) => project.category === category)
     .forEach((project) => {
+      const isPhotographBook = category === "Photograph";
       const card = project.url ? document.createElement("a") : document.createElement("figure");
-      card.className = ["work-card", "reveal", project.variant].filter(Boolean).join(" ");
+      card.className = ["work-card", "reveal", project.variant, isPhotographBook && "is-photograph-book"]
+        .filter(Boolean)
+        .join(" ");
 
       if (project.url) {
         card.href = project.url;
@@ -185,10 +189,33 @@ function renderProjects(category) {
 
       const media = project.cover || project.image;
       if (media) {
-        const img = document.createElement("img");
-        img.src = assetUrl(media);
-        img.alt = project.title;
-        card.append(img);
+        if (isPhotographBook) {
+          const cover = document.createElement("div");
+          cover.className = "photograph-cover-thumbnail";
+
+          const imageFrame = document.createElement("span");
+          imageFrame.className = "photograph-cover-thumbnail__image";
+          const img = document.createElement("img");
+          img.src = assetUrl(media);
+          img.alt = "";
+          imageFrame.append(img);
+
+          const title = document.createElement("span");
+          title.className = "photograph-cover-thumbnail__title";
+          title.textContent = project.title;
+
+          const author = document.createElement("span");
+          author.className = "photograph-cover-thumbnail__author";
+          author.textContent = "Nogime togo";
+
+          cover.append(imageFrame, title, author);
+          card.append(cover);
+        } else {
+          const img = document.createElement("img");
+          img.src = assetUrl(media);
+          img.alt = project.title;
+          card.append(img);
+        }
       } else {
         const placeholder = document.createElement("div");
         placeholder.className = "work-card-placeholder";
@@ -196,10 +223,11 @@ function renderProjects(category) {
         card.append(placeholder);
       }
 
-      const caption = document.createElement("figcaption");
-      caption.innerHTML = `<strong>${project.title}</strong><span>${project.category} / ${project.year}</span>`;
-
-      card.append(caption);
+      if (!isPhotographBook) {
+        const caption = document.createElement("figcaption");
+        caption.innerHTML = `<strong>${project.title}</strong><span>${project.category} / ${project.year}</span>`;
+        card.append(caption);
+      }
       galleryGrid.append(card);
       revealObserver.observe(card);
     });
