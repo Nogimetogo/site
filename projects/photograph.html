@@ -4,51 +4,66 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photograph | Nogime togo</title>
-    <meta name="description" content="Nogime togoのPhotographコンセプトページ。">
-    <link rel="stylesheet" href="../styles.css?v=20260630-frame-fit">
+    <meta name="description" content="Nogime togoのPhotograph作品を、製本された写真集のように閲覧できます。">
+    <link rel="stylesheet" href="../styles.css?v=20260719-photobook">
   </head>
-  <body class="project-page photograph-page" data-return-url="../index.html?category=Photograph#gallery">
-    <header class="site-header">
-      <div class="brand-block">
-        <a class="brand" href="../index.html#top">Nogime togo</a>
-        <p class="brand-tagline">Draw | Build | Place<br>Works in Architecture &amp; Photography</p>
-      </div>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primaryNav">MENU</button>
-      <nav id="primaryNav" class="primary-nav" aria-label="Primary navigation">
-        <a href="../index.html?category=Photograph#gallery">PICK UP</a>
-        <a href="../index.html#profile">PROFILE</a>
-        <a href="../index.html#news">NEWS</a>
-        <a href="../contact.html">CONTACT</a>
-      </nav>
+  <body class="photo-book-page" data-return-url="../index.html?category=Photograph#gallery">
+    <header class="book-header">
+      <a class="book-brand" href="../index.html?category=Photograph#gallery">Nogime togo</a>
+      <p class="book-section">Photograph</p>
+      <a class="book-close" href="../index.html?category=Photograph#gallery" aria-label="写真集を閉じる">close</a>
     </header>
 
-    <main class="project-main">
-      <article class="photograph-detail">
-        <div class="photograph-heading reveal">
-          <p class="project-kicker">Photograph / <span data-project-year></span></p>
-          <h1 class="project-title" data-project-title></h1>
-        </div>
+    <main class="book-stage">
+      <section class="photo-book is-closed" data-photo-book aria-label="写真集">
+        <button class="book-cover" type="button" data-open-book aria-label="表紙を開く">
+          <span class="cover-title" data-cover-title></span>
+          <span class="cover-author">Nogime togo</span>
+          <span class="cover-image">
+            <img data-cover-image alt="">
+          </span>
+        </button>
 
-        <div class="photograph-images" data-project-images aria-label="Photograph concept images">
-          <button class="photograph-nav photograph-nav--previous" type="button" data-image-previous aria-label="前の画像に戻る" disabled>
-            <span aria-hidden="true">&#8592;</span>
-          </button>
-          <button class="photograph-nav photograph-nav--next" type="button" data-image-next aria-label="次の画像に進む">
-            <span aria-hidden="true">&#8594;</span>
-          </button>
+        <div class="book-spread" data-book-spread aria-live="polite">
+          <figure class="book-page book-page--left">
+            <div class="page-photo">
+              <img data-left-image alt="">
+            </div>
+          </figure>
+          <figure class="book-page book-page--right">
+            <div class="page-photo">
+              <img data-right-image alt="">
+            </div>
+          </figure>
+          <span class="book-gutter" aria-hidden="true"></span>
         </div>
-      </article>
+      </section>
+
+      <nav class="book-controls" aria-label="写真集ページ操作">
+        <button type="button" data-previous-page aria-label="前の見開き">←</button>
+        <p><span data-current-spread>表紙</span><span class="control-divider"> / </span><span data-total-spreads>0</span></p>
+        <button type="button" data-next-page aria-label="次の見開き">→</button>
+      </nav>
+      <p class="book-hint" data-book-hint>表紙をクリックして開く</p>
     </main>
 
-    <a class="project-close" href="../index.html?category=Photograph#gallery">close</a>
-
-    <script src="../data/photograph-projects.js?v=20260704-lingering-refresh"></script>
+    <script src="../data/photograph-projects.js?v=20260719-photobook"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
-      const project = (window.photographProjects || []).find((item) => item.slug === slug) || window.photographProjects?.[0];
-      let currentImage = 0;
-      let imageLocked = false;
+      const project = (window.photographProjects || []).find((item) => item.slug === slug)
+        || window.photographProjects?.[0];
+      const book = document.querySelector("[data-photo-book]");
+      const openButton = document.querySelector("[data-open-book]");
+      const previousButton = document.querySelector("[data-previous-page]");
+      const nextButton = document.querySelector("[data-next-page]");
+      const leftImage = document.querySelector("[data-left-image]");
+      const rightImage = document.querySelector("[data-right-image]");
+      const hint = document.querySelector("[data-book-hint]");
+      const currentSpread = document.querySelector("[data-current-spread]");
+      const totalSpreads = document.querySelector("[data-total-spreads]");
+      const coverFadeDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 420;
+      let spread = -1;
 
       function assetUrl(path) {
         if (!path) return "";
@@ -56,123 +71,101 @@
         return `../${path}`;
       }
 
-      if (project) {
-        document.title = `${project.title} | Nogime togo`;
-        document.querySelector("[data-project-year]").textContent = project.year;
-        document.querySelector("[data-project-title]").textContent = project.title;
-        document.querySelector("[data-project-images]").setAttribute("aria-label", `${project.title} images`);
-
-        const images = document.querySelector("[data-project-images]");
-        project.images.forEach((image, index) => {
-          const figure = document.createElement("figure");
-          figure.className = `photograph-frame${index === 0 ? " is-active" : ""}`;
-          const img = document.createElement("img");
-          img.src = assetUrl(image);
-          img.alt = `${project.title} image ${index + 1}`;
-          figure.append(img);
-          images.append(figure);
-        });
-      }
-
-      document.documentElement.classList.add("reveal-ready");
-      document.querySelector(".photograph-heading").classList.add("is-visible");
-
-      function showImage(index) {
-        const frames = [...document.querySelectorAll(".photograph-frame")];
-        if (!frames.length) return;
-        frames[currentImage].classList.remove("is-active");
-        currentImage = Math.min(Math.max(index, 0), frames.length - 1);
-        frames[currentImage].classList.add("is-active");
-        updateImageNavigation(frames.length);
-      }
-
-      function updateImageNavigation(imageCount = document.querySelectorAll(".photograph-frame").length) {
-        const previousButton = document.querySelector("[data-image-previous]");
-        const nextButton = document.querySelector("[data-image-next]");
-        previousButton.disabled = currentImage <= 0;
-        nextButton.disabled = imageCount === 0 || currentImage >= imageCount - 1;
-      }
-
-      function closeProject() {
-        window.location.href = document.body.dataset.returnUrl;
-      }
-
-      function showNextImage() {
-        if (imageLocked) return;
-        const frames = [...document.querySelectorAll(".photograph-frame")];
-        if (currentImage >= frames.length - 1) return;
-        imageLocked = true;
-        showImage(currentImage + 1);
-        window.setTimeout(() => {
-          imageLocked = false;
-        }, 760);
-      }
-
-      function showPreviousImage() {
-        if (imageLocked || currentImage <= 0) return;
-        imageLocked = true;
-        showImage(currentImage - 1);
-        window.setTimeout(() => {
-          imageLocked = false;
-        }, 760);
-      }
-
-      window.addEventListener("wheel", (event) => {
-        event.preventDefault();
-        if (event.deltaY > 8 || event.deltaX > 8) {
-          showNextImage();
-        } else if (event.deltaY < -8 || event.deltaX < -8) {
-          showPreviousImage();
-        }
-      }, { passive: false });
-
-      let touchStartX = 0;
-      let touchStartY = 0;
-
-      window.addEventListener("touchstart", (event) => {
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
-      }, { passive: true });
-
-      window.addEventListener("touchend", (event) => {
-        const touch = event.changedTouches[0];
-        const dx = touch.clientX - touchStartX;
-        const dy = touch.clientY - touchStartY;
-        if (Math.max(Math.abs(dx), Math.abs(dy)) <= 16) return;
-        const movement = Math.abs(dx) >= Math.abs(dy) ? dx : dy;
-        if (movement < 0) showNextImage();
-        else showPreviousImage();
-      }, { passive: true });
-
-      document.querySelector("[data-image-previous]").addEventListener("click", showPreviousImage);
-      document.querySelector("[data-image-next]").addEventListener("click", showNextImage);
-
-      window.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") showPreviousImage();
-        if (event.key === "ArrowRight") showNextImage();
-      });
-
-      updateImageNavigation();
-
-      const primaryNav = document.querySelector(".primary-nav");
-      const menuButton = document.querySelector(".menu-button");
-
-      menuButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const open = !primaryNav.classList.contains("is-open");
-        primaryNav.classList.toggle("is-open", open);
-        menuButton.setAttribute("aria-expanded", String(open));
-      });
-
-      document.addEventListener("click", (event) => {
-        if (event.target.closest("a")) return;
-        if (event.target.closest("button")) return;
-        if (event.target.closest(".photograph-images")) {
-          showNextImage();
+      function setPageImage(element, image, index) {
+        const page = element.closest(".book-page");
+        if (!image) {
+          element.removeAttribute("src");
+          element.alt = "";
+          page.classList.add("is-blank");
           return;
         }
-        closeProject();
+        element.src = assetUrl(image);
+        element.alt = `${project.title} 写真 ${index + 1}`;
+        page.classList.remove("is-blank");
+      }
+
+      function renderSpread() {
+        const leftIndex = spread * 2;
+        const rightIndex = leftIndex + 1;
+        setPageImage(leftImage, project.images[leftIndex], leftIndex);
+        setPageImage(rightImage, project.images[rightIndex], rightIndex);
+        currentSpread.textContent = String(spread + 1);
+        previousButton.disabled = false;
+        nextButton.disabled = spread >= Math.ceil(project.images.length / 2) - 1;
+      }
+
+      function openBook() {
+        if (!book.classList.contains("is-closed") || book.classList.contains("is-cover-fading")) return;
+        spread = 0;
+        renderSpread();
+        book.classList.add("is-cover-fading");
+        openButton.setAttribute("aria-hidden", "true");
+        openButton.tabIndex = -1;
+        hint.textContent = "余白をクリック、または矢印キーでページをめくる";
+        window.setTimeout(() => {
+          book.classList.remove("is-closed", "is-cover-fading");
+        }, coverFadeDuration);
+      }
+
+      function turnTo(nextSpread) {
+        if (nextSpread < 0 || nextSpread >= Math.ceil(project.images.length / 2)) return;
+        spread = nextSpread;
+        renderSpread();
+      }
+
+      function previous() {
+        if (spread === 0) {
+          spread = -1;
+          book.classList.add("is-closed");
+          openButton.removeAttribute("aria-hidden");
+          openButton.tabIndex = 0;
+          currentSpread.textContent = "表紙";
+          previousButton.disabled = true;
+          nextButton.disabled = false;
+          hint.textContent = "表紙をクリックして開く";
+          return;
+        }
+        turnTo(spread - 1);
+      }
+
+      if (project?.images?.length) {
+        document.title = `${project.title} | Nogime togo`;
+        book.setAttribute("aria-label", `${project.title} 写真集`);
+        document.querySelector("[data-cover-title]").textContent = project.title;
+        const coverImage = document.querySelector("[data-cover-image]");
+        coverImage.src = assetUrl(project.cover || project.images[0]);
+        coverImage.alt = `${project.title} 表紙`;
+        totalSpreads.textContent = String(Math.ceil(project.images.length / 2));
+        nextButton.disabled = false;
+      } else {
+        document.querySelector("[data-cover-title]").textContent = "Photograph";
+        previousButton.disabled = true;
+        nextButton.disabled = true;
+        openButton.disabled = true;
+        hint.textContent = "作品を表示できません";
+      }
+
+      openButton.addEventListener("click", openBook);
+      previousButton.addEventListener("click", previous);
+      nextButton.addEventListener("click", () => {
+        if (spread < 0) openBook();
+        else turnTo(spread + 1);
       });
+      document.querySelector("[data-book-spread]").addEventListener("click", (event) => {
+        if (event.clientX < window.innerWidth / 2) previous();
+        else turnTo(spread + 1);
+      });
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") previous();
+        if (event.key === "ArrowRight" || event.key === "Enter" && spread < 0) {
+          if (spread < 0) openBook();
+          else turnTo(spread + 1);
+        }
+        if (event.key === "Escape") {
+          window.location.href = document.body.dataset.returnUrl;
+        }
+      });
+      previousButton.disabled = true;
     </script>
   </body>
 </html>
