@@ -107,8 +107,20 @@
         }, coverFadeDuration);
       }
 
+      function closeProject() {
+        if (document.referrer && window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+        window.location.href = document.body.dataset.returnUrl;
+      }
+
       function turnTo(nextSpread) {
-        if (nextSpread < 0 || nextSpread >= Math.ceil(project.images.length / 2)) return;
+        if (nextSpread < 0) return;
+        if (nextSpread >= Math.ceil(project.images.length / 2)) {
+          closeProject();
+          return;
+        }
         spread = nextSpread;
         renderSpread();
       }
@@ -162,7 +174,7 @@
           else turnTo(spread + 1);
         }
         if (event.key === "Escape") {
-          window.location.href = document.body.dataset.returnUrl;
+          closeProject();
         }
       });
       previousButton.disabled = true;
