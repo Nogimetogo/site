@@ -1579,12 +1579,12 @@ main {
   display: block;
   background:
     linear-gradient(90deg, rgba(42, 42, 39, 0.055), transparent 4%),
-    #fafaf8;
+    var(--photograph-cover, #fafaf8);
   box-shadow:
     inset 7px 0 10px rgba(27, 27, 25, 0.09),
     inset 0 0 0 1px rgba(75, 74, 69, 0.08),
     8px 12px 18px rgba(25, 25, 23, 0.24);
-  color: var(--book-ink);
+  color: var(--photograph-cover-ink, var(--book-ink));
   text-align: left;
   cursor: pointer;
   transform-origin: left center;
@@ -1647,7 +1647,7 @@ main {
   width: 72%;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(8px, 0.68vw, 11px);
-  color: #686762;
+  color: var(--photograph-cover-secondary, #686762);
   text-align: center;
 }
 
@@ -1869,7 +1869,7 @@ main {
 .work-card.is-photograph-book {
   aspect-ratio: 254 / 305;
   overflow: hidden;
-  background: #fafaf8;
+  background: var(--photograph-cover, #fafaf8);
   box-shadow:
     0 1px 1px rgba(31, 30, 28, 0.12),
     0 13px 24px rgba(31, 30, 28, 0.08);
@@ -1906,7 +1906,7 @@ main {
 .photograph-cover-thumbnail {
   position: absolute;
   inset: 0;
-  color: #232321;
+  color: var(--photograph-cover-ink, #232321);
 }
 
 .photograph-cover-thumbnail__image {
@@ -1926,8 +1926,7 @@ main {
   filter: saturate(0.72) contrast(0.93);
 }
 
-.photograph-cover-thumbnail__title,
-.photograph-cover-thumbnail__author {
+.photograph-cover-thumbnail__title {
   position: absolute;
   left: 14%;
   width: 72%;
@@ -1944,13 +1943,6 @@ main {
   letter-spacing: 0.045em;
 }
 
-.photograph-cover-thumbnail__author {
-  top: 83%;
-  color: #686762;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(7px, 0.58vw, 10px);
-}
-
 @media (max-width: 900px) {
   .masonry-grid.is-photograph-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1962,9 +1954,6 @@ main {
     font-size: clamp(9px, 1.35vw, 12px);
   }
 
-  .photograph-cover-thumbnail__author {
-    font-size: clamp(8px, 1.05vw, 10px);
-  }
 }
 
 @media (max-width: 560px) {
@@ -1978,7 +1967,46 @@ main {
     font-size: clamp(9px, 2.7vw, 12px);
   }
 
-  .photograph-cover-thumbnail__author {
-    font-size: clamp(8px, 2.2vw, 10px);
-  }
+}
+
+.cover-theme-beige {
+  --photograph-cover: #d7c8ac;
+  --photograph-cover-ink: #40372d;
+  --photograph-cover-secondary: #665847;
+}
+
+.cover-theme-blue-black {
+  --photograph-cover: #172631;
+  --photograph-cover-ink: #d9dde0;
+  --photograph-cover-secondary: #aeb8bf;
+}
+
+.cover-theme-graphic-charcoal {
+  --photograph-cover: #626365;
+  --photograph-cover-ink: #ecebe6;
+  --photograph-cover-secondary: #d1d0ca;
+}
+
+.cover-theme-dark-green {
+  --photograph-cover: #26382f;
+  --photograph-cover-ink: #d8c59b;
+  --photograph-cover-secondary: #b7a77f;
+}
+
+.cover-theme-charcoal-brown {
+  --photograph-cover: #4b403b;
+  --photograph-cover-ink: #dec9a7;
+  --photograph-cover-secondary: #baa98e;
+}
+
+.cover-theme-black-90 {
+  --photograph-cover: #1a1a1a;
+  --photograph-cover-ink: #d7d7d3;
+  --photograph-cover-secondary: #aaa9a5;
+}
+
+.cover-theme-gray-pink {
+  --photograph-cover: #d5bec1;
+  --photograph-cover-ink: #493c3e;
+  --photograph-cover-secondary: #756164;
 }

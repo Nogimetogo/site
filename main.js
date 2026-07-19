@@ -167,6 +167,20 @@ function setCounterActiveCategory(category) {
     metric.classList.toggle("is-counter-active", categories.includes(category));
   });
 }
+
+function getPhotographCoverTheme(project) {
+  if (project.slug.startsWith("roof-")) return "beige";
+  if (["urban-arrangement", "urban-arrangement-change", "urban-wall", "wall-distance"].includes(project.slug)) {
+    return "blue-black";
+  }
+  if (project.slug.startsWith("nogime-")) return "graphic-charcoal";
+  if (project.slug === "image-edge-form") return "dark-green";
+  if (project.slug === "window-gaze-knot") return "charcoal-brown";
+  if (project.slug === "lingering-undecided-ending") return "black-90";
+  if (project.slug === "photograph-half-phrase") return "gray-pink";
+  return "beige";
+}
+
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
   galleryGrid.classList.toggle("is-art-gallery", category === "Art/Press");
@@ -181,6 +195,9 @@ function renderProjects(category) {
       card.className = ["work-card", "reveal", project.variant, isPhotographBook && "is-photograph-book"]
         .filter(Boolean)
         .join(" ");
+      if (isPhotographBook) {
+        card.classList.add(`cover-theme-${getPhotographCoverTheme(project)}`);
+      }
 
       if (project.url) {
         card.href = project.url;
@@ -204,11 +221,7 @@ function renderProjects(category) {
           title.className = "photograph-cover-thumbnail__title";
           title.textContent = project.title;
 
-          const author = document.createElement("span");
-          author.className = "photograph-cover-thumbnail__author";
-          author.textContent = "Nogime togo";
-
-          cover.append(imageFrame, title, author);
+          cover.append(imageFrame, title);
           card.append(cover);
         } else {
           const img = document.createElement("img");
