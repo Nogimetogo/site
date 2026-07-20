@@ -3,6 +3,10 @@ window.photographProjects = window.photographProjects || [];
 window.photographProjects.push({
   slug: "section-two-worlds",
   title: "6.0 断面とは二つの世界を同時に可視化する形式である",
+  coverTitleLines: [
+    "6.0 断面とは二つの世界を",
+    "同時に可視化する形式である"
+  ],
   category: "Photograph",
   year: "2026",
   summary: [],

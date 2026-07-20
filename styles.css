@@ -1558,7 +1558,7 @@ main {
 
 .photo-book {
   position: relative;
-  width: min(82vw, calc((100dvh - 168px) * 1.6656));
+  width: min(82vw, calc((100dvh - 220px) * 1.6656));
   aspect-ratio: 508 / 305;
   transform-style: preserve-3d;
   filter:
@@ -1631,7 +1631,7 @@ main {
 }
 
 .photo-book.is-closed {
-  width: min(41vw, calc((100dvh - 168px) * 0.8328));
+  width: min(41vw, calc((100dvh - 220px) * 0.8328));
   aspect-ratio: 254 / 305;
 }
 
@@ -1766,8 +1766,11 @@ main {
 .page-photo {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .page-photo img {
@@ -2023,6 +2026,141 @@ main {
   line-height: 1.5;
   letter-spacing: 0.045em;
   z-index: 4;
+}
+
+/* Photograph covers — soft paper print with a full-bleed crop. */
+.photo-book .book-cover {
+  padding: 0;
+  background: #e7e3da;
+}
+
+.photo-book .cover-image {
+  inset: 0;
+  width: auto;
+  aspect-ratio: auto;
+  background: #e7e3da;
+}
+
+.photo-book .cover-image img,
+.work-card.is-photograph-book .photograph-cover-thumbnail__image img {
+  object-position: 46% 42%;
+  filter: saturate(0.58) contrast(0.78) brightness(1.08) sepia(0.08);
+  transform: scale(1.04);
+}
+
+.photo-book .book-cover::after,
+.work-card.is-photograph-book::after {
+  background-image:
+    linear-gradient(rgba(248, 246, 239, 0.18), rgba(239, 236, 228, 0.1)),
+    url("./assets/textures/book-cloth.webp");
+  background-position: center, 37% 63%;
+  background-size: 100% 100%, 520px 520px;
+  background-blend-mode: screen, soft-light;
+  mix-blend-mode: normal;
+  opacity: 0.72;
+}
+
+.photo-book .book-cover::after {
+  z-index: 10;
+}
+
+.photo-book .book-cover::before {
+  z-index: 11;
+}
+
+.photo-book .cover-title,
+.photo-book .cover-author {
+  left: 46%;
+  width: 50%;
+  z-index: 12;
+  color: rgba(247, 244, 235, 0.82);
+  text-align: left;
+  text-shadow: 0 1px 1px rgba(48, 44, 38, 0.18);
+}
+
+.photo-book .cover-title {
+  top: 44.5%;
+  font-family: "Helvetica Neue", "Yu Gothic", "YuGothic", Arial, sans-serif;
+  font-size: clamp(11.5px, 0.95vw, 15.2px);
+  font-weight: 300;
+  line-height: 1.5;
+  max-height: 3em;
+  overflow: hidden;
+}
+
+.photo-book .cover-author {
+  top: 54%;
+  font-size: clamp(9px, 0.7vw, 11.5px);
+  text-align: left;
+}
+
+.work-card.is-photograph-book .photograph-cover-thumbnail__image {
+  inset: 0;
+  width: auto;
+  aspect-ratio: auto;
+  background: #e7e3da;
+}
+
+.work-card.is-photograph-book::after {
+  z-index: 5;
+  background-size: 100% 100%, 260px 260px;
+  transition: none;
+}
+
+.work-card.is-photograph-book:hover::after {
+  background-color: transparent;
+  background-size: 100% 100%, 260px 260px;
+}
+
+.work-card.is-photograph-book .photograph-cover-thumbnail__title {
+  top: auto;
+  right: auto;
+  bottom: 9%;
+  left: 10%;
+  width: 80%;
+  z-index: 7;
+  color: rgba(250, 248, 242, 0.94);
+  font-family: "Helvetica Neue", "Yu Gothic", "YuGothic", Arial, sans-serif;
+  font-size: clamp(11.5px, 0.88vw, 14.5px);
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(35, 32, 28, 0.28);
+  transform: none;
+  max-height: 3.1em;
+  overflow: hidden;
+}
+
+.photo-book .cover-title > span,
+.work-card.is-photograph-book .photograph-cover-thumbnail__title > span {
+  display: block;
+}
+
+.photo-book .cover-title > span:not(:only-child),
+.work-card.is-photograph-book .photograph-cover-thumbnail__title > span:not(:only-child) {
+  white-space: nowrap;
+}
+
+.photo-book .cover-title > span:only-child,
+.work-card.is-photograph-book .photograph-cover-thumbnail__title > span:only-child {
+  overflow-wrap: anywhere;
+}
+
+.work-card.is-photograph-book .photograph-cover-thumbnail__image img {
+  filter: saturate(0.6) contrast(0.84) brightness(1.06) sepia(0.06);
+}
+
+.work-card.is-photograph-book:nth-child(3n + 1) .photograph-cover-thumbnail__image img {
+  object-position: 42% 38%;
+}
+
+.work-card.is-photograph-book:nth-child(3n + 2) .photograph-cover-thumbnail__image img {
+  object-position: 58% 50%;
+}
+
+.work-card.is-photograph-book:nth-child(3n + 3) .photograph-cover-thumbnail__image img {
+  object-position: 48% 62%;
 }
 
 @media (max-width: 900px) {

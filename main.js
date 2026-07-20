@@ -197,6 +197,7 @@ function renderProjects(category) {
         .join(" ");
       if (isPhotographBook) {
         card.classList.add(`cover-theme-${getPhotographCoverTheme(project)}`);
+        card.classList.add(`project-${project.slug}`);
       }
 
       if (project.url) {
@@ -217,9 +218,14 @@ function renderProjects(category) {
           img.alt = "";
           imageFrame.append(img);
 
-          const title = document.createElement("span");
-          title.className = "photograph-cover-thumbnail__title";
-          title.textContent = project.title;
+            const title = document.createElement("span");
+            title.className = "photograph-cover-thumbnail__title";
+            const titleLines = project.coverTitleLines || [project.title];
+            titleLines.forEach((line) => {
+              const titleLine = document.createElement("span");
+              titleLine.textContent = line;
+              title.append(titleLine);
+            });
 
           cover.append(imageFrame, title);
           card.append(cover);

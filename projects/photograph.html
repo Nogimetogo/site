@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photograph | Nogime togo</title>
     <meta name="description" content="Nogime togoのPhotograph作品を、製本された写真集のように閲覧できます。">
-    <link rel="stylesheet" href="../styles.css?v=20260719-section-two-worlds-5mm">
+    <link rel="stylesheet" href="../styles.css?v=20260720-soft-full-bleed-covers-all">
   </head>
   <body class="photo-book-page" data-return-url="../index.html?category=Photograph#gallery">
     <header class="book-header">
@@ -59,7 +59,7 @@
     </main>
 
     <script src="../data/photograph-projects.js?v=20260719-photobook"></script>
-    <script src="../data/photograph-projects-6.js?v=20260719-section-two-worlds"></script>
+    <script src="../data/photograph-projects-6.js?v=20260720-two-line-cover-title"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
@@ -188,8 +188,15 @@
       if (project?.images?.length) {
         document.title = `${project.title} | Nogime togo`;
         book.classList.add(`cover-theme-${getPhotographCoverTheme(project)}`);
+        book.classList.add(`project-${project.slug}`);
         book.setAttribute("aria-label", `${project.title} 写真集`);
-        document.querySelector("[data-cover-title]").textContent = project.title;
+        const coverTitle = document.querySelector("[data-cover-title]");
+        const coverTitleLines = project.coverTitleLines || [project.title];
+        coverTitle.replaceChildren(...coverTitleLines.map((line) => {
+          const titleLine = document.createElement("span");
+          titleLine.textContent = line;
+          return titleLine;
+        }));
         const coverImage = document.querySelector("[data-cover-image]");
         coverImage.src = assetUrl(project.cover || project.images[0]);
         coverImage.alt = `${project.title} 表紙`;
