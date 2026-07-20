@@ -59,10 +59,22 @@
     </main>
 
     <script src="../data/photograph-projects.js?v=20260719-photobook"></script>
+    <script src="../data/photograph-project-merges.js?v=20260720-merge-1-3-series-revised"></script>
     <script src="../data/photograph-projects-6.js?v=20260720-two-line-cover-title"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
-      const slug = params.get("slug");
+      const slugAliases = {
+        "urban-arrangement-change": "urban-arrangement",
+        "wall-distance": "urban-wall",
+        "roof-equilibrium": "roof-interface",
+        "roof-trace": "roof-interface",
+        "roof-irreversible": "roof-invisible-force",
+        "nogime-no-background": "nogime-unnamed-arrangement",
+        "nogime-no-focus-pattern": "nogime-unnamed-arrangement",
+        "nogime-open-form": "nogime-whole-as-part"
+      };
+      const requestedSlug = params.get("slug");
+      const slug = slugAliases[requestedSlug] || requestedSlug;
       const project = (window.photographProjects || []).find((item) => item.slug === slug)
         || window.photographProjects?.[0];
       const book = document.querySelector("[data-photo-book]");
