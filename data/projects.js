@@ -12,7 +12,7 @@ window.nogimeProjects = [
     summary: [],
     cover: "assets/projects/art-press/art-photograph-1/art-photograph-1-001.webp",
     images: Array.from(
-      { length: 97 },
+      { length: 82 },
       (_, index) => `assets/projects/art-press/art-photograph-1/art-photograph-1-${String(index + 1).padStart(3, "0")}.webp`
     ),
     url: "./projects/art-press.html?slug=art-photograph-1"
@@ -30,7 +30,7 @@ window.nogimeProjects = [
     summary: [],
     cover: "assets/projects/art-press/art-photograph-2/art-photograph-2-001.webp",
     images: Array.from(
-      { length: 100 },
+      { length: 79 },
       (_, index) => `assets/projects/art-press/art-photograph-2/art-photograph-2-${String(index + 1).padStart(3, "0")}.webp`
     ),
     url: "./projects/art-press.html?slug=art-photograph-2"
