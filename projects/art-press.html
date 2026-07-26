@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Art/Press | Nogime togo</title>
     <meta name="description" content="Nogime togoのArt/Pressアーカイブ。">
-    <link rel="stylesheet" href="../styles.css?v=20260718-bookmat-soft-bevel">
+    <link rel="stylesheet" href="../styles.css?v=20260726-art-photograph">
   </head>
   <body class="project-page" data-return-url="../index.html?category=Art%2FPress#gallery">
     <header class="site-header">
@@ -35,8 +35,12 @@
     </main>
 
     <div class="project-return">Click anywhere to return</div>
+    <div class="image-lightbox" data-image-lightbox aria-hidden="true">
+      <div class="image-lightbox__content" data-image-lightbox-content></div>
+      <span class="image-lightbox__hint">Click to close</span>
+    </div>
 
-    <script src="../data/projects.js?v=20260718-silent-interfaces"></script>
+    <script src="../data/projects.js?v=20260726-art-photograph"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
@@ -57,6 +61,40 @@
         const usesBookmat = project.presentation?.startsWith("bookmat");
         document.body.classList.toggle("art-gallery-page", usesBookmat);
 
+        const lightbox = document.querySelector("[data-image-lightbox]");
+        const lightboxContent = document.querySelector("[data-image-lightbox-content]");
+
+        function closeLightbox() {
+          lightbox.classList.remove("is-open");
+          lightbox.setAttribute("aria-hidden", "true");
+          lightboxContent.replaceChildren();
+          document.body.classList.remove("has-image-lightbox");
+        }
+
+        function openLightbox(img) {
+          const mat = img.closest(".bookmat");
+          if (mat) {
+            const enlargedMat = mat.cloneNode(true);
+            enlargedMat.classList.add("image-lightbox__bookmat");
+            const enlargedImage = enlargedMat.querySelector("img");
+            enlargedImage.loading = "eager";
+            lightboxContent.replaceChildren(enlargedMat);
+          } else {
+            const enlargedImage = img.cloneNode();
+            enlargedImage.className = "image-lightbox__image";
+            enlargedImage.loading = "eager";
+            lightboxContent.replaceChildren(enlargedImage);
+          }
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+          document.body.classList.add("has-image-lightbox");
+        }
+
+        lightbox.addEventListener("click", (event) => {
+          event.stopPropagation();
+          closeLightbox();
+        });
+
         const summary = document.querySelector("[data-project-summary]");
         project.summary.forEach((text) => {
           const paragraph = document.createElement("p");
@@ -71,35 +109,56 @@
           const img = document.createElement("img");
           img.src = assetUrl(image);
           img.alt = project.imageCaptions?.[index] || `${project.title} image ${index + 1}`;
+          img.loading = index < 2 ? "eager" : "lazy";
+          img.decoding = "async";
           img.addEventListener("error", () => {
             figure.remove();
           }, { once: true });
+          if (project.zoomable) {
+            img.classList.add("is-zoomable");
+            img.addEventListener("click", (event) => {
+              event.stopPropagation();
+              openLightbox(img);
+            });
+          }
 
           if (usesBookmat) {
             const mat = document.createElement("div");
             mat.className = "bookmat";
-            const window = document.createElement("div");
-            window.className = "bookmat__window";
+            const windowElement = document.createElement("div");
+            windowElement.className = "bookmat__window";
 
-            if (project.presentation === "bookmat-fit") {
-              const [width, height] = project.imageDimensions?.[index] || [];
-              if (width && height) {
-                const ratio = width / height;
-                const apertureWidth = Math.min(245, 194 * ratio);
-                const apertureHeight = apertureWidth / ratio;
-                window.style.width = `${(apertureWidth / 305) * 100}%`;
-                window.style.height = `${(apertureHeight / 254) * 100}%`;
-                window.style.aspectRatio = `${width} / ${height}`;
-              }
+            function sizeBookmat(width, height) {
+              if (!width || !height || !project.presentation.includes("fit")) return;
+              const ratio = width / height;
+              const portraitMat = Boolean(project.portraitMats && height > width);
+              mat.classList.toggle("is-portrait", portraitMat);
+
+              const matWidth = portraitMat ? 254 : 305;
+              const matHeight = portraitMat ? 305 : 254;
+              const apertureMaxWidth = portraitMat ? 194 : 245;
+              const apertureMaxHeight = portraitMat ? 245 : 194;
+              const apertureWidth = Math.min(apertureMaxWidth, apertureMaxHeight * ratio);
+              const apertureHeight = apertureWidth / ratio;
+
+              windowElement.style.width = `${(apertureWidth / matWidth) * 100}%`;
+              windowElement.style.height = `${(apertureHeight / matHeight) * 100}%`;
+              windowElement.style.aspectRatio = `${width} / ${height}`;
             }
 
-            window.append(img);
-            mat.append(window);
+            const [width, height] = project.imageDimensions?.[index] || [];
+            if (width && height) {
+              sizeBookmat(width, height);
+            } else {
+              img.addEventListener("load", () => sizeBookmat(img.naturalWidth, img.naturalHeight), { once: true });
+            }
+
+            windowElement.append(img);
+            mat.append(windowElement);
             figure.append(mat);
           } else {
             figure.append(img);
           }
-
           const captionText = project.imageCaptions?.[index];
           if (captionText) {
             const caption = document.createElement("figcaption");
@@ -136,6 +195,7 @@
       });
 
       document.addEventListener("click", (event) => {
+        if (document.body.classList.contains("has-image-lightbox")) return;
         if (event.target.closest("a")) return;
         if (event.target.closest("button")) return;
         window.location.href = document.body.dataset.returnUrl;

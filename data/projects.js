@@ -1,5 +1,41 @@
 window.nogimeProjects = [
   {
+    slug: "art-photograph-1",
+    title: "Art Photograph1",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-1/art-photograph-1-001.webp",
+    images: Array.from(
+      { length: 97 },
+      (_, index) => `assets/projects/art-press/art-photograph-1/art-photograph-1-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-1"
+  },
+  {
+    slug: "art-photograph-2",
+    title: "Art Photograph2",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-2/art-photograph-2-001.webp",
+    images: Array.from(
+      { length: 100 },
+      (_, index) => `assets/projects/art-press/art-photograph-2/art-photograph-2-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-2"
+  },
+  {
     slug: "silent-interfaces",
     title: "Silent Interfaces",
     category: "Art/Press",
@@ -7,6 +43,7 @@ window.nogimeProjects = [
     year: "2026",
     variant: "wide art-bookmat",
     presentation: "bookmat-fit",
+    zoomable: true,
     summary: [],
     cover: "assets/projects/art-press/silent-interfaces/piece-01.jpg",
     images: [
@@ -33,6 +70,7 @@ window.nogimeProjects = [
     year: "2026",
     variant: "wide art-bookmat",
     presentation: "bookmat",
+    zoomable: true,
     summary: [],
     cover: "assets/projects/art-press/transfiguration-2/void.jpg",
     images: [
@@ -77,6 +115,7 @@ window.nogimeProjects = [
     year: "2026",
     variant: "wide art-bookmat",
     presentation: "bookmat",
+    zoomable: true,
     summary: [],
     cover: "assets/projects/art-press/developing/density.jpg",
     images: [
