@@ -20,11 +20,6 @@
     "2.0都市は配置である"
   );
   mergeProject(
-    "urban-wall",
-    "wall-distance",
-    "2.1都市は壁である"
-  );
-  mergeProject(
     "roof-interface",
     "roof-equilibrium",
     "1.0 屋根は都市の界面である"
