@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photograph | Nogime togo</title>
     <meta name="description" content="Nogime togoのPhotograph作品を、製本された写真集のように閲覧できます。">
-    <link rel="stylesheet" href="../styles.css?v=20260726-crown-line-alignment">
+    <link rel="stylesheet" href="../styles.css?v=20260801-crown-line-margin">
   </head>
   <body class="photo-book-page" data-return-url="../index.html?category=Photograph#gallery">
     <header class="book-header">
@@ -61,7 +61,7 @@
     <script src="../data/photograph-projects-7.js?v=20260726-lingering-canvas"></script>
     <script src="../data/photograph-project-merges.js?v=20260726-wall-distance-to-2-0"></script>
     <script src="../data/photograph-projects-6.js?v=20260720-two-line-cover-title"></script>
-    <script src="../data/photograph-projects-9.js?v=20260726-crown-line"></script>
+    <script src="../data/photograph-projects-9.js?v=20260801-clown-line-margin"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slugAliases = {
@@ -78,6 +78,9 @@
       const project = (window.photographProjects || []).find((item) => item.slug === slug)
         || window.photographProjects?.[0];
       const book = document.querySelector("[data-photo-book]");
+      if (project?.contentMargin) {
+        book.style.setProperty("--book-content-margin", project.contentMargin);
+      }
       const openButton = document.querySelector("[data-open-book]");
       const previousButton = document.querySelector("[data-previous-page]");
       const nextButton = document.querySelector("[data-next-page]");

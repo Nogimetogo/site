@@ -1789,7 +1789,7 @@ body.has-image-lightbox {
   min-width: 0;
   height: 100%;
   margin: 0;
-  padding: 3.94%;
+  padding: var(--book-content-margin, 3.94%);
   display: grid;
   place-items: center;
   background: var(--book-paper);
@@ -1891,7 +1891,7 @@ body.has-image-lightbox {
 }
 
 .book-spread.is-single-spread .book-spread__full {
-  inset: 10mm;
+  inset: var(--book-content-margin, 10mm);
   justify-content: center;
 }
 
@@ -1992,7 +1992,7 @@ body.has-image-lightbox {
   }
 
   .book-page {
-    padding: 3.94%;
+    padding: var(--book-content-margin, 3.94%);
   }
 
   .book-hint {

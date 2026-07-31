@@ -2,14 +2,15 @@ window.photographProjects = window.photographProjects || [];
 
 window.photographProjects.push({
   slug: "crown-line",
-  title: "9.0 Crown Lineは、建築の冠ではなく都市に描かれる輪郭である",
+  title: "9.0 Clown lineとは、都市に描かれる輪郭である",
   coverTitleLines: [
-    "9.0 Crown Line",
+    "9.0 Clown lineとは、",
     "都市に描かれる輪郭である"
   ],
   category: "Photograph",
   year: "2026",
   summary: [],
+  contentMargin: "5mm",
   cover: "assets/projects/photograph/concepts/crown-line/L1000544.webp",
   images: [
     "assets/projects/photograph/concepts/crown-line/L1000544.webp",
