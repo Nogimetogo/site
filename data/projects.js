@@ -126,6 +126,60 @@ window.nogimeProjects = [
     url: "./projects/art-press.html?slug=art-photograph-7"
   },
   {
+    slug: "art-photograph-8",
+    title: "Art Photograph8",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-8/art-photograph-8-001.webp",
+    images: Array.from(
+      { length: 47 },
+      (_, index) => `assets/projects/art-press/art-photograph-8/art-photograph-8-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-8"
+  },
+  {
+    slug: "art-photograph-9",
+    title: "Art Photograph9",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-9/art-photograph-9-001.webp",
+    images: Array.from(
+      { length: 46 },
+      (_, index) => `assets/projects/art-press/art-photograph-9/art-photograph-9-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-9"
+  },
+  {
+    slug: "art-photograph-10",
+    title: "Art Photograph10",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-10/art-photograph-10-001.webp",
+    images: Array.from(
+      { length: 46 },
+      (_, index) => `assets/projects/art-press/art-photograph-10/art-photograph-10-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-10"
+  },
+  {
     slug: "silent-interfaces",
     title: "Silent Interfaces",
     category: "Art/Press",
