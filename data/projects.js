@@ -180,6 +180,78 @@ window.nogimeProjects = [
     url: "./projects/art-press.html?slug=art-photograph-10"
   },
   {
+    slug: "art-photograph-11",
+    title: "Art Photograph11",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-11/art-photograph-11-001.webp",
+    images: Array.from(
+      { length: 44 },
+      (_, index) => `assets/projects/art-press/art-photograph-11/art-photograph-11-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-11"
+  },
+  {
+    slug: "art-photograph-12",
+    title: "Art Photograph12",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-12/art-photograph-12-001.webp",
+    images: Array.from(
+      { length: 43 },
+      (_, index) => `assets/projects/art-press/art-photograph-12/art-photograph-12-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-12"
+  },
+  {
+    slug: "art-photograph-13",
+    title: "Art Photograph13",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-13/art-photograph-13-001.webp",
+    images: Array.from(
+      { length: 44 },
+      (_, index) => `assets/projects/art-press/art-photograph-13/art-photograph-13-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-13"
+  },
+  {
+    slug: "art-photograph-14",
+    title: "Art Photograph14",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-14/art-photograph-14-001.webp",
+    images: Array.from(
+      { length: 44 },
+      (_, index) => `assets/projects/art-press/art-photograph-14/art-photograph-14-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-14"
+  },
+  {
     slug: "silent-interfaces",
     title: "Silent Interfaces",
     category: "Art/Press",
