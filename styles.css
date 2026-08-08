@@ -736,7 +736,14 @@ main {
 }
 
 .work-card.art-bookmat {
-  padding: clamp(14px, 1.9vw, 28px);
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: center;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 305 / 254;
+  padding: 15% 10%;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(218, 214, 204, 0.34)),
     #eeeae0;
@@ -747,7 +754,7 @@ main {
 }
 
 .work-card.art-bookmat img {
-  object-fit: contain;
+  object-fit: cover;
   background: #e5e1d7;
   box-shadow:
     0 0 0 1px rgba(92, 86, 75, 0.18),
