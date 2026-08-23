@@ -252,6 +252,24 @@ window.nogimeProjects = [
     url: "./projects/art-press.html?slug=art-photograph-14"
   },
   {
+    slug: "art-photograph-15",
+    title: "Art Photograph15",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-15/art-photograph-15-001.webp",
+    images: Array.from(
+      { length: 40 },
+      (_, index) => `assets/projects/art-press/art-photograph-15/art-photograph-15-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-15"
+  },
+  {
     slug: "art-photograph-16",
     title: "Art Photograph16",
     category: "Art/Press",
