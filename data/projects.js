@@ -306,6 +306,42 @@ window.nogimeProjects = [
     url: "./projects/art-press.html?slug=art-photograph-17"
   },
   {
+    slug: "art-photograph-18",
+    title: "Art Photograph18",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-18/art-photograph-18-001.webp",
+    images: Array.from(
+      { length: 32 },
+      (_, index) => `assets/projects/art-press/art-photograph-18/art-photograph-18-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-18"
+  },
+  {
+    slug: "art-photograph-19",
+    title: "Art Photograph19",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-19/art-photograph-19-001.webp",
+    images: Array.from(
+      { length: 40 },
+      (_, index) => `assets/projects/art-press/art-photograph-19/art-photograph-19-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-19"
+  },
+  {
     slug: "silent-interfaces",
     title: "Silent Interfaces",
     category: "Art/Press",
