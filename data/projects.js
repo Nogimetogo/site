@@ -342,6 +342,24 @@ window.nogimeProjects = [
     url: "./projects/art-press.html?slug=art-photograph-19"
   },
   {
+    slug: "art-photograph-20",
+    title: "Art Photograph20",
+    category: "Art/Press",
+    kicker: "Art",
+    year: "2026",
+    variant: "wide art-bookmat",
+    presentation: "bookmat-fit-responsive",
+    portraitMats: true,
+    zoomable: true,
+    summary: [],
+    cover: "assets/projects/art-press/art-photograph-20/art-photograph-20-001.webp",
+    images: Array.from(
+      { length: 40 },
+      (_, index) => `assets/projects/art-press/art-photograph-20/art-photograph-20-${String(index + 1).padStart(3, "0")}.webp`
+    ),
+    url: "./projects/art-press.html?slug=art-photograph-20"
+  },
+  {
     slug: "silent-interfaces",
     title: "Silent Interfaces",
     category: "Art/Press",
