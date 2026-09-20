@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact | Nogime togo</title>
     <meta name="description" content="Nogime togo contact form.">
-    <link rel="stylesheet" href="./styles.css?v=20260519-customform">
+    <link rel="stylesheet" href="./styles.css?v=20260921-contact-protection">
   </head>
   <body class="contact-page">
     <header class="site-header">
@@ -30,23 +30,25 @@
         <form
           class="contact-form site-contact-form"
           id="contactForm"
-          action="https://docs.google.com/forms/d/e/1FAIpQLSfXRR-Vg8r_nlWYwngZN1SAe3pnCIyet5YVg3N31ezfEzsHuw/formResponse"
-          method="POST"
-          target="googleFormTarget"
+          action="./contact.html"
+          method="GET"
         >
           <div class="form-field">
             <label for="contactName">&#12362;&#21517;&#21069;</label>
-            <input id="contactName" name="contactName" type="text" autocomplete="name" required>
+            <input id="contactName" name="contactName" type="text" autocomplete="name" maxlength="100" required>
           </div>
           <div class="form-field">
             <label for="contactEmail">&#12513;&#12540;&#12523;&#12450;&#12489;&#12524;&#12473;</label>
-            <input id="contactEmail" name="entry.1848378054" type="email" autocomplete="email" required>
+            <input id="contactEmail" name="contactEmail" type="email" autocomplete="email" maxlength="254" required>
           </div>
           <div class="form-field">
             <label for="contactMessage">&#12362;&#21839;&#12356;&#21512;&#12431;&#12379;&#20869;&#23481;</label>
-            <textarea id="contactMessage" name="contactMessage" required></textarea>
+            <textarea id="contactMessage" name="contactMessage" minlength="1" maxlength="5000" required></textarea>
           </div>
-          <input type="hidden" id="googleMessage" name="entry.1272481879">
+          <div class="form-field form-field--trap" aria-hidden="true">
+            <label for="contactWebsite">Website</label>
+            <input id="contactWebsite" name="website" type="text" autocomplete="off" tabindex="-1">
+          </div>
           <div class="form-actions">
             <a href="./index.html#contact">Back</a>
             <button type="submit">Send</button>
@@ -74,12 +76,52 @@
       const form = document.querySelector("#contactForm");
       const status = document.querySelector(".form-status");
       const submitButton = form.querySelector("button[type='submit']");
+      const formTarget = document.querySelector("[name='googleFormTarget']");
+      let formStartedAt = Date.now();
+      let submissionPending = false;
+      let completionTimer;
 
-      form.addEventListener("submit", () => {
+      function completeSubmission() {
+        if (!submissionPending) return;
+        submissionPending = false;
+        window.clearTimeout(completionTimer);
+        form.reset();
+        formStartedAt = Date.now();
+        submitButton.disabled = false;
+        status.textContent = "\u9001\u4fe1\u3057\u307e\u3057\u305f\u3002\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002";
+        window.sessionStorage.setItem("contactSubmittedAt", String(Date.now()));
+      }
+
+      formTarget.addEventListener("load", completeSubmission);
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
         const name = document.querySelector("#contactName").value.trim();
         const email = document.querySelector("#contactEmail").value.trim();
         const message = document.querySelector("#contactMessage").value.trim();
-        document.querySelector("#googleMessage").value = [
+        const trap = document.querySelector("#contactWebsite").value.trim();
+        const lastSubmittedAt = Number(window.sessionStorage.getItem("contactSubmittedAt") || 0);
+
+        status.textContent = "";
+
+        if (trap || Date.now() - formStartedAt < 3000) {
+          status.textContent = "\u9001\u4fe1\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u5c11\u3057\u6642\u9593\u3092\u304a\u3044\u3066\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002";
+          return;
+        }
+
+        if (message.length < 1) {
+          status.textContent = "\u304a\u554f\u3044\u5408\u308f\u305b\u5185\u5bb9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002";
+          document.querySelector("#contactMessage").focus();
+          return;
+        }
+
+        if (lastSubmittedAt && Date.now() - lastSubmittedAt < 60000) {
+          status.textContent = "\u9023\u7d9a\u9001\u4fe1\u306f\u3067\u304d\u307e\u305b\u3093\u30021\u5206\u5f8c\u306b\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002";
+          return;
+        }
+
+        const googleMessage = [
           "Nogime togo website contact",
           "",
           `\u304a\u540d\u524d: ${name}`,
@@ -92,11 +134,29 @@
         submitButton.disabled = true;
         status.textContent = "Sending...";
 
-        window.setTimeout(() => {
-          form.reset();
-          submitButton.disabled = false;
-          status.textContent = "\u9001\u4fe1\u3057\u307e\u3057\u305f\u3002\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002";
-        }, 1200);
+        const googleForm = document.createElement("form");
+        googleForm.method = "POST";
+        googleForm.target = "googleFormTarget";
+        googleForm.action = [
+          "https://docs.google.com/forms/d/e/",
+          "1FAIpQLSfXRR-Vg8r_nlWYwngZN1SAe3pnCIyet5YVg3N31ezfEzsHuw",
+          "/formResponse"
+        ].join("");
+        googleForm.hidden = true;
+
+        [["entry.1848378054", email], ["entry.1272481879", googleMessage]].forEach(([fieldName, value]) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = fieldName;
+          input.value = value;
+          googleForm.append(input);
+        });
+
+        document.body.append(googleForm);
+        submissionPending = true;
+        googleForm.submit();
+        googleForm.remove();
+        completionTimer = window.setTimeout(completeSubmission, 6000);
       });
     </script>
   </body>

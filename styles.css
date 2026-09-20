@@ -530,6 +530,16 @@ main {
   gap: 8px;
 }
 
+.form-field--trap {
+  position: fixed;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .form-field label {
   color: var(--muted);
   font-size: 12px;
