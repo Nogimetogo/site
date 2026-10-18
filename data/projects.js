@@ -408,7 +408,7 @@ window.nogimeProjects = [
     summary: [],
     cover: "assets/projects/art-press/art-photograph-23/art-photograph-23-001.webp",
     images: Array.from(
-      { length: 24 },
+      { length: 26 },
       (_, index) => `assets/projects/art-press/art-photograph-23/art-photograph-23-${String(index + 1).padStart(3, "0")}.webp`
     ),
     url: "./projects/art-press.html?slug=art-photograph-23"
