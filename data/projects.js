@@ -639,6 +639,8 @@ window.nogimeProjects.push(...[
     "year": "2026",
     "cover": "assets/projects/velo/velo-001/001.webp",
     "category": "Velo",
+    "zoomable": true,
+    "presentation": "bookmat-fit-responsive",
     "images": [
       "assets/projects/velo/velo-001/001.webp",
       "assets/projects/velo/velo-001/002.webp",
@@ -688,7 +690,7 @@ window.nogimeProjects.push(...[
       "assets/projects/velo/velo-001/046.webp"
     ],
     "variant": "wide art-bookmat",
-    "url": "./projects/art-press.html?slug=velo-001&v=velo-detail-3",
+    "url": "./projects/art-press.html?slug=velo-001&v=velo-zoom-2",
     "title": "Velo 001",
     "slug": "velo-001"
   },
@@ -697,6 +699,8 @@ window.nogimeProjects.push(...[
     "year": "2026",
     "cover": "assets/projects/velo/velo-002/001.webp",
     "category": "Velo",
+    "zoomable": true,
+    "presentation": "bookmat-fit-responsive",
     "images": [
       "assets/projects/velo/velo-002/001.webp",
       "assets/projects/velo/velo-002/002.webp",
@@ -746,7 +750,7 @@ window.nogimeProjects.push(...[
       "assets/projects/velo/velo-002/046.webp"
     ],
     "variant": "wide art-bookmat",
-    "url": "./projects/art-press.html?slug=velo-002&v=velo-detail-3",
+    "url": "./projects/art-press.html?slug=velo-002&v=velo-zoom-2",
     "title": "Velo 002",
     "slug": "velo-002"
   },
@@ -755,6 +759,8 @@ window.nogimeProjects.push(...[
     "year": "2026",
     "cover": "assets/projects/velo/velo-003/001.webp",
     "category": "Velo",
+    "zoomable": true,
+    "presentation": "bookmat-fit-responsive",
     "images": [
       "assets/projects/velo/velo-003/001.webp",
       "assets/projects/velo/velo-003/002.webp",
@@ -803,7 +809,7 @@ window.nogimeProjects.push(...[
       "assets/projects/velo/velo-003/045.webp"
     ],
     "variant": "wide art-bookmat",
-    "url": "./projects/art-press.html?slug=velo-003&v=velo-detail-3",
+    "url": "./projects/art-press.html?slug=velo-003&v=velo-zoom-2",
     "title": "Velo 003",
     "slug": "velo-003"
   },
@@ -812,6 +818,8 @@ window.nogimeProjects.push(...[
     "year": "2026",
     "cover": "assets/projects/velo/velo-004/001.webp",
     "category": "Velo",
+    "zoomable": true,
+    "presentation": "bookmat-fit-responsive",
     "images": [
       "assets/projects/velo/velo-004/001.webp",
       "assets/projects/velo/velo-004/002.webp",
@@ -860,7 +868,7 @@ window.nogimeProjects.push(...[
       "assets/projects/velo/velo-004/045.webp"
     ],
     "variant": "wide art-bookmat",
-    "url": "./projects/art-press.html?slug=velo-004&v=velo-detail-3",
+    "url": "./projects/art-press.html?slug=velo-004&v=velo-zoom-2",
     "title": "Velo 004",
     "slug": "velo-004"
   }

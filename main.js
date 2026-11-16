@@ -183,7 +183,7 @@ function getPhotographCoverTheme(project) {
 
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
-  galleryGrid.classList.toggle("is-art-gallery", ["Art", "Press", "Street", "Velo"].includes(category));
+  galleryGrid.classList.toggle("is-art-gallery", ["Art", "Press", "Street", "Velo", "Urban"].includes(category));
   galleryGrid.classList.toggle("is-photograph-gallery", category === "Conceptual Photograph");
   setCounterActiveCategory(category);
 
