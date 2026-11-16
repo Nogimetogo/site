@@ -183,7 +183,7 @@ function getPhotographCoverTheme(project) {
 
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
-  galleryGrid.classList.toggle("is-art-gallery", ["Art", "Press", "Street"].includes(category));
+  galleryGrid.classList.toggle("is-art-gallery", ["Art", "Press", "Street", "Velo"].includes(category));
   galleryGrid.classList.toggle("is-photograph-gallery", category === "Conceptual Photograph");
   setCounterActiveCategory(category);
 
@@ -278,6 +278,10 @@ categoryButtons.forEach((button) => {
   button.addEventListener("click", () => {
     categoryButtons.forEach((item) => item.classList.toggle("is-active", item === button));
     renderProjects(button.dataset.category);
+    const url = new URL(window.location.href);
+    url.searchParams.set("category", button.dataset.category);
+    url.hash = "gallery";
+    window.history.replaceState(window.history.state, "", url);
   });
 });
 

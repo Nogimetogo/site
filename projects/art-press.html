@@ -40,11 +40,11 @@
       <span class="image-lightbox__hint">Click to close</span>
     </div>
 
-    <script src="../data/projects.js?v=20261105-art-photograph-24"></script>
+    <script src="../data/projects.js?v=velo-detail-3"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
-      const project = (window.nogimeProjects || []).find((item) => item.slug === slug) || window.nogimeProjects?.[0];
+      const project = (window.nogimeProjects || []).find((item) => item.slug === slug);
 
       function assetUrl(path) {
         if (!path) return "";
@@ -99,7 +99,7 @@
         });
 
         const summary = document.querySelector("[data-project-summary]");
-        project.summary.forEach((text) => {
+        (project.summary || []).forEach((text) => {
           const paragraph = document.createElement("p");
           paragraph.textContent = text;
           summary.append(paragraph);
