@@ -54,6 +54,9 @@
 
       if (project) {
         document.title = `${project.title} | Nogime togo`;
+      const returnUrl = "../index.html?category=" + encodeURIComponent(project.category) + "#gallery";
+      document.body.dataset.returnUrl = returnUrl;
+      document.querySelector('a[href*="category=Art%2FPress"]').href = returnUrl;
         document.querySelector("[data-project-kicker]").textContent = project.kicker || project.category;
         document.querySelector("[data-project-year]").textContent = project.year;
         document.querySelector("[data-project-title]").textContent = project.title;

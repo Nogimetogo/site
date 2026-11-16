@@ -7,7 +7,7 @@ window.photographProjects.push({
     "9.0 Clown lineとは、",
     "都市に描かれる輪郭である"
   ],
-  category: "Photograph",
+  category: "Conceptual Photograph",
   year: "2026",
   summary: [],
   contentMargin: "5mm",

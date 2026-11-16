@@ -163,7 +163,7 @@ function renderArchitectureCounter() {
 
 function setCounterActiveCategory(category) {
   counterMetrics.forEach((metric) => {
-    const categories = metric.dataset.counterCategory.split(/\s+/);
+    const categories = metric.dataset.counterCategory.split("|");
     metric.classList.toggle("is-counter-active", categories.includes(category));
   });
 }
@@ -183,14 +183,14 @@ function getPhotographCoverTheme(project) {
 
 function renderProjects(category) {
   galleryGrid.innerHTML = "";
-  galleryGrid.classList.toggle("is-art-gallery", category === "Art/Press");
-  galleryGrid.classList.toggle("is-photograph-gallery", category === "Photograph");
+  galleryGrid.classList.toggle("is-art-gallery", ["Art", "Press", "Street"].includes(category));
+  galleryGrid.classList.toggle("is-photograph-gallery", category === "Conceptual Photograph");
   setCounterActiveCategory(category);
 
   projects
     .filter((project) => project.category === category)
     .forEach((project) => {
-      const isPhotographBook = category === "Photograph";
+      const isPhotographBook = category === "Conceptual Photograph";
       const card = project.url ? document.createElement("a") : document.createElement("figure");
       card.className = ["work-card", "reveal", project.variant, isPhotographBook && "is-photograph-book"]
         .filter(Boolean)
@@ -323,10 +323,11 @@ if (navObserver) {
   document.querySelectorAll("section[id]").forEach((section) => navObserver.observe(section));
 }
 document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
-const requestedCategory = new URLSearchParams(window.location.search).get("category");
+const categoryParam = new URLSearchParams(window.location.search).get("category");
+const requestedCategory = categoryParam === "Photograph" ? "Conceptual Photograph" : categoryParam === "Art/Press" ? "Art" : categoryParam;
 const initialCategory = categoryButtons.some((button) => button.dataset.category === requestedCategory)
   ? requestedCategory
-  : "Photograph";
+  : "Conceptual Photograph";
 
 categoryButtons.forEach((button) => {
   button.classList.toggle("is-active", button.dataset.category === initialCategory);

@@ -7,7 +7,7 @@ window.photographProjects.push({
     "6.0 断面とは二つの世界を",
     "同時に可視化する形式である"
   ],
-  category: "Photograph",
+  category: "Conceptual Photograph",
   year: "2026",
   summary: [],
   cover: "assets/projects/photograph/concepts/section-two-worlds/DSCF1913.webp",
