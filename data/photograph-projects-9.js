@@ -25,6 +25,10 @@ window.photographProjects.push({
     "assets/projects/photograph/concepts/crown-line/DSCF8565.webp",
     "assets/projects/photograph/concepts/crown-line/DSCF9440.webp",
     "assets/projects/photograph/concepts/crown-line/DSCF8351.webp",
+    "assets/projects/photograph/concepts/crown-line/L1003474.webp",
+    "assets/projects/photograph/concepts/crown-line/L1003479.webp",
+    "assets/projects/photograph/concepts/crown-line/DSCF9733.webp",
+    "assets/projects/photograph/concepts/crown-line/L1003480.webp",
     "assets/projects/photograph/concepts/crown-line/DSCF9732.webp",
     "assets/projects/photograph/concepts/crown-line/DSCF9735.webp",
     "assets/projects/photograph/concepts/crown-line/L1000985.webp",
@@ -48,6 +52,10 @@ window.photographProjects.push({
     { single: "assets/projects/photograph/concepts/crown-line/DSCF8565.webp", align: "left" },
     { single: "assets/projects/photograph/concepts/crown-line/DSCF9440.webp", align: "left" },
     { single: "assets/projects/photograph/concepts/crown-line/DSCF8351.webp", align: "left" },
+    { single: "assets/projects/photograph/concepts/crown-line/L1003474.webp", align: "center" },
+    { single: "assets/projects/photograph/concepts/crown-line/L1003479.webp", align: "center" },
+    { single: "assets/projects/photograph/concepts/crown-line/DSCF9733.webp", align: "center" },
+    { single: "assets/projects/photograph/concepts/crown-line/L1003480.webp", align: "center" },
     {
       left: "assets/projects/photograph/concepts/crown-line/DSCF9732.webp",
       right: "assets/projects/photograph/concepts/crown-line/DSCF9735.webp"
